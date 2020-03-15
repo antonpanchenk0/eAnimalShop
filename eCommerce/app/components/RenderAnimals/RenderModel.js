@@ -1,6 +1,6 @@
 export class RenderModel {
   constructor() {
-    this.dataLink = '../../app/data/data.json';
+    this.dataLink = 'https://antonpanchenk0.github.io/eAnimalShop/eCommerce/app/data/data.json';
   }
 
   getData() {
