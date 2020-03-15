@@ -1,12 +1,18 @@
 export class RenderModel {
   constructor() {
-    this.dataLink = '../../app/data/data.json'
+    this.dataLink = '../../app/data/data.json';
   }
 
   getData() {
-    return fetch(this.dataLink).then(res => res.json()).then(obj => {
-      console.log(obj);
-      return obj;
+    return fetch(this.dataLink).then(res => res.json()).then(arr => {
+      return arr;
     });
+  }
+
+  //getting an arr of 4 animals from data arr
+  getAnimalsForSinglePage = (arr, pageIndex) => {
+    let arrIndex = (pageIndex - 1) * 4;
+
+    return arr.slice(arrIndex, arrIndex + 4);
   }
 }

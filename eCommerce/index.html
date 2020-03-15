@@ -1,97 +1,104 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./app/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <title>Shop</title>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./app/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>Shop</title>
 </head>
+
 <body>
-<nav class="navbar navbar-dark bg-dark justify-content-between">
+  <nav class="navbar navbar-dark bg-dark justify-content-between">
     <a class="navbar-brand m-0" href="#">&#128021;PetShop</a>
     <div class="right-section d-flex justify-content-between align-items-center">
-        <div class="cart-count d-flex justify-content-center align-items-center">
-            <p class="m-0 font-weight-bold">0</p>
-        </div>
-        <a href="#" class="cart">&#128722;</a>
+      <div class="cart-count d-flex justify-content-center align-items-center">
+        <p class="m-0 font-weight-bold">0</p>
+      </div>
+      <a href="#" class="cart">&#128722;</a>
     </div>
-</nav>
-<div class="container-fluid row root m-0">
+  </nav>
+  <div class="container-fluid row root m-0">
     <div class="col-12 filter">
-        <div class="row justify-content-between">
-            <div class="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
-                <form class="form-inline mb-2 mb-sm-0 my-lg-0 m-0">
-                    <input class="form-control mr-sm-2 filter-search" type="search" placeholder="Search" aria-label="Search">
-                </form>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
-                <div class="btn-group" role="group" aria-label="CategoriesGroup">
-                    <button type="button" class="btn btn-warning btn-filter f-active">Dogs</button>
-                    <button type="button" class="btn btn-warning btn-filter">Cats</button>
-                    <button type="button" class="btn btn-warning btn-filter">Birds</button>
-                </div>
-            </div>
+      <div class="row justify-content-between">
+        <div class="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
+          <form class="form-inline mb-2 mb-sm-0 my-lg-0 m-0">
+            <input class="form-control mr-sm-2 filter-search" type="search" placeholder="Search" aria-label="Search">
+          </form>
         </div>
+        <div class="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
+          <div class="btn-group" role="group" aria-label="CategoriesGroup">
+            <button type="button" class="btn btn-warning btn-filter f-active">Dogs</button>
+            <button type="button" class="btn btn-warning btn-filter">Cats</button>
+            <button type="button" class="btn btn-warning btn-filter">Birds</button>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-12 content">
-        <div class="row animals-list m-0" id="animalContainer">
-            <div class="col-12 col-sm-6 col-md-4 col-xl-3 p-2">
-                <div class="card p-0">
-                    <div class="animal-img" style="background-image: url(https://i.insider.com/5c79b7e2eb3ce83af24c4403?width=1000&format=jpeg&auto=webp)"></div>
-                    <div class="card-body">
-                        <h5 class="card-title">Animal Name</h5>
-                        <p class="card-text">Short description</p>
-                        <p class="card-price">Price: ₴<span>1500</span></p>
-                    </div>
-                    <div class="card-footer d-flex justify-content-center align-items-center p-1">
-                        <a href="#" class="btn btn-card w-50 font-weight-bold">Add to cart</a>
-                        <a href="#" class="btn btn-card w-50 font-weight-bold" data-toggle="modal" data-target="#modalWindow">Details</a>
-                    </div>
-                </div>
+      <div class="row animals-list m-0" id="animalContainer">
+        <div class="col-12 col-sm-6 col-md-4 col-xl-3 p-2">
+          <div class="card p-0">
+            <div class="animal-img"
+              style="background-image: url(https://i.insider.com/5c79b7e2eb3ce83af24c4403?width=1000&format=jpeg&auto=webp)">
             </div>
+            <div class="card-body">
+              <h5 class="card-title">Animal Name</h5>
+              <p class="card-text">Short description</p>
+              <p class="card-price">Price: ₴<span>1500</span></p>
+            </div>
+            <div class="card-footer d-flex justify-content-center align-items-center p-1">
+              <a href="#" class="btn btn-card w-50 font-weight-bold">Add to cart</a>
+              <a href="#" class="btn btn-card w-50 font-weight-bold" data-toggle="modal"
+                data-target="#modalWindow">Details</a>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
     <nav aria-label="animalNavigation" class="w-100 mt-3 mb-0">
-        <ul class="pagination justify-content-center">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a id="animalNavigationPrev" class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item"><a id="pageIndex" class="page-link" href="#">1</a></li>
+        <li class="page-item">
+          <a id="animalNavigationNext" class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
     </nav>
-</div>
+  </div>
 
-<div class="modal fade" id="modalWindow" tabindex="-1" role="dialog" aria-labelledby="modalWindowLabel" aria-hidden="true">
+  <div class="modal fade" id="modalWindow" tabindex="-1" role="dialog" aria-labelledby="modalWindowLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalWindowLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Description
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add to cart</button>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalWindowLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="modal-body">
+          Description
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Add to cart</button>
+        </div>
+      </div>
     </div>
-</div>
-<script src="./app/bootstrap/jquery-3.4.1.slim.min.js"></script>
-<script src="./app/bootstrap/bootstrap.min.js"></script>
-<script src="./app/main.js" type="module"></script>
+  </div>
+  <script src="./app/bootstrap/jquery-3.4.1.slim.min.js"></script>
+  <script src="./app/bootstrap/bootstrap.min.js"></script>
+  <script src="./app/main.js" type="module"></script>
 </body>
+
 </html>

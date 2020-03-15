@@ -1,18 +1,23 @@
 export class RenderView {
-  constructor(cBack) {
+  constructor(renderAnimals, handleClickPaginationNext, handleClickPaginationPrev) {
     this.animalContainer = document.querySelector('#animalContainer') 
-    window.addEventListener('load', cBack);  
+    window.addEventListener('load', renderAnimals);
+
+    // page number in pagination
+    this.pageIndex = document.querySelector('#pageIndex');
+    document.querySelector('#animalNavigationNext').addEventListener('click', handleClickPaginationNext);
+    document.querySelector('#animalNavigationPrev').addEventListener('click', handleClickPaginationPrev);
   }
 
   renderData(arr) {
     this.animalContainer.innerHTML = arr.map(el => this.renderSingleAnimal(el)).join('');
   }
 
-  renderSingleAnimal({id, species, price, gender, weight, birth_date, color, breed, image, is_sterile, hair}) {
+  renderSingleAnimal({id, species, price, name, gender, weight, birth_date, color, breed, image, is_sterile, hair}) {
     return `
          <div class="col-12 col-sm-6 col-md-4 col-xl-3 p-2">
             <div class="card p-0">
-                <div class="animal-img" style="background-image: url(${image})"></div>
+                <div class="animal-img" style="background-image: url('${image}')"></div>
                     <div class="card-body">
                         <h5 class="card-title">${name}</h5>
                         <p class="card-text">Breed: ₴<span>${breed}</span></p>
@@ -26,5 +31,13 @@ export class RenderView {
             </div>
          </div>
     `;
+  }
+
+  getPageIndex() {
+    return +this.pageIndex.innerHTML;
+  }
+
+  setPageIndex(num) {
+    this.pageIndex.innerHTML = `${num}`;
   }
 }
