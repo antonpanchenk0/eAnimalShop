@@ -2,15 +2,10 @@ export class RenderView {
   constructor(renderAnimals, handleClickPaginationNext, handleClickPaginationPrev) {
     this.animalContainer = document.querySelector('#animalContainer') 
     window.addEventListener('load', renderAnimals);
-
-    // page number in pagination
-    this.pageIndex = document.querySelector('#pageIndex');
-    document.querySelector('#animalNavigationNext').addEventListener('click', handleClickPaginationNext);
-    document.querySelector('#animalNavigationPrev').addEventListener('click', handleClickPaginationPrev);
   }
 
   renderData(arr) {
-    this.animalContainer.innerHTML = arr.map(el => this.renderSingleAnimal(el)).join('');
+    this.animalContainer.innerHTML = arr.map(animal => this.renderSingleAnimal(animal)).join('');
   }
 
   renderSingleAnimal({id, species, price, name, gender, weight, birth_date, color, breed, image, is_sterile, hair}) {
@@ -31,13 +26,5 @@ export class RenderView {
             </div>
          </div>
     `;
-  }
-
-  getPageIndex() {
-    return +this.pageIndex.innerHTML;
-  }
-
-  setPageIndex(num) {
-    this.pageIndex.innerHTML = `${num}`;
   }
 }

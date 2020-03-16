@@ -5,14 +5,8 @@ export class RenderModel {
 
   getData() {
     return fetch(this.dataLink).then(res => res.json()).then(arr => {
+      this.data = arr.map(obj => obj);
       return arr;
     });
-  }
-
-  //getting an arr of 4 animals from data arr
-  getAnimalsForSinglePage = (arr, pageIndex) => {
-    let arrIndex = (pageIndex - 1) * 4;
-
-    return arr.slice(arrIndex, arrIndex + 4);
   }
 }
