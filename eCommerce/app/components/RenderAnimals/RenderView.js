@@ -15,7 +15,7 @@ export class RenderView {
                 <div class="animal-img" style="background-image: url('${image}')"></div>
                     <div class="card-body">
                         <h5 class="card-title">${name}</h5>
-                        <p class="card-text">Breed: ₴<span>${breed}</span></p>
+                        <p class="card-text">Breed: <span>${breed}</span></p>
                         <p class="card-price">Price: ₴<span>${price}</span></p>
                     </div>
                     <div class="card-footer d-flex justify-content-center align-items-center p-1">

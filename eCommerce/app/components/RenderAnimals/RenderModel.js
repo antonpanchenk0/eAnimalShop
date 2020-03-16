@@ -1,6 +1,7 @@
 export class RenderModel {
   constructor() {
     this.dataLink = 'https://antonpanchenk0.github.io/eAnimalShop/eCommerce/app/data/data.json';
+    this.data = [];
   }
 
   getData() {
@@ -8,5 +9,10 @@ export class RenderModel {
       this.data = arr.map(obj => obj);
       return arr;
     });
+  }
+
+  filterData(str){
+      const regSearch = new RegExp(str, 'iy');
+      return this.data.filter(({breed})=>regSearch.test(breed));
   }
 }

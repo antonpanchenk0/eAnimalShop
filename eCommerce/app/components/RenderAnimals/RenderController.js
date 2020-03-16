@@ -8,6 +8,12 @@ export class RenderController {
   }
 
   renderAnimals = () => {
-    this.model.getData().then(() => this.view.renderData(this.model.data.slice(0,4)));
+    this.model.getData().then(() => this.view.renderData(this.model.data));
+  }
+
+  renderFilterAnimals = (str) =>{
+      const data = this.model.filterData(str);
+      console.log(data)
+      this.view.renderData(data);
   }
 }
