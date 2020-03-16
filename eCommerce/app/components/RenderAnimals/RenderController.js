@@ -13,7 +13,6 @@ export class RenderController {
 
   renderFilterAnimals = (str) =>{
       const data = this.model.filterData(str);
-      console.log(data)
       this.view.renderData(data);
   }
 }

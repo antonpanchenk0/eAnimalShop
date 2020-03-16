@@ -1,5 +1,5 @@
 export class RenderView {
-  constructor(renderAnimals, handleClickPaginationNext, handleClickPaginationPrev) {
+  constructor(renderAnimals) {
     this.animalContainer = document.querySelector('#animalContainer') 
     window.addEventListener('load', renderAnimals);
   }
