@@ -2,7 +2,7 @@ export class FilterView{
     constructor(handleUpdateDataByFilters){
         this.dataInput = document.querySelector('input.filter-search');
         this.dataInput.addEventListener('input', handleUpdateDataByFilters);
-        this.activeFilter = null;
+        this.activeFilter = {};
         this.filterCountainer = document.querySelector('div#filter');
 
         this.handleUpdateDataByFilters = handleUpdateDataByFilters;
@@ -15,7 +15,8 @@ export class FilterView{
     renderFilters(data){
         this.renderSingleFilter('all', this.filterCountainer).classList.add('f-active');
         data.forEach(value=>this.renderSingleFilter(value, this.filterCountainer));
-        this.activeFilter = document.querySelector('button.btn-filter');
+        this.activeFilter.node = document.querySelector('button.btn-filter');
+        this.activeFilter.value = 'all';
     }
 
     renderSingleFilter(value, parent){
@@ -28,9 +29,10 @@ export class FilterView{
             e.preventDefault();
             btn.classList.add('f-active');
             if(this.activeFilter){
-                this.activeFilter.classList.remove('f-active');
+                this.activeFilter.node.classList.remove('f-active');
             }
-            this.activeFilter = e.target;
+            this.activeFilter.name = value;
+            this.activeFilter.node = e.target;
             this.handleUpdateDataByFilters();
         });
         parent.appendChild(btn);

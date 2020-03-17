@@ -14,6 +14,6 @@ export class FilterController{
     }
 
     updateFiltersValueForRerender = () =>{
-        this.notify('search', {inputSearch: this.view.dataInputValue, activeBtn: this.view.activeFilter.innerHTML});
+        this.notify('search', {inputSearch: this.view.dataInputValue, activeBtn: this.view.activeFilter.name});
     }
 }
