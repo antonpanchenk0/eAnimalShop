@@ -1,12 +1,19 @@
 import {FilterView} from "./FilterView.js";
 
 export class FilterController{
-    constructor(rFilterData){
-        this.view = new FilterView(this.renderNewData);
-        this.filterRender = rFilterData;
+    constructor({notify, subscribe}){
+        this.view = new FilterView(this.updateFiltersValueForRerender);
+        this.subscribe = subscribe;
+        this.notify = notify;
+
+        this.subscribe('getFilters', this.renderFilterBtn)
     }
 
-    renderNewData = () =>{
-        this.filterRender(this.view.dataInputValue);
+    renderFilterBtn = (data) =>{
+        this.view.renderFilters(data);
+    }
+
+    updateFiltersValueForRerender = () =>{
+        this.notify('search', {inputSearch: this.view.dataInputValue, activeBtn: this.view.activeFilter.innerHTML});
     }
 }

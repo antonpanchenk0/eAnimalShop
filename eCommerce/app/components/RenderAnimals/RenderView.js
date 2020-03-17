@@ -1,7 +1,6 @@
 export class RenderView {
-  constructor(renderAnimals) {
-    this.animalContainer = document.querySelector('#animalContainer') 
-    window.addEventListener('load', renderAnimals);
+  constructor() {
+    this.animalContainer = document.querySelector('#animalContainer');
   }
 
   renderData(arr) {
