@@ -1,6 +1,6 @@
 import { PaginationView } from "./PaginationView.js";
 
-export class SortController {
+export class PaginationController {
   constructor({notify}) {
 
   }
