@@ -21,9 +21,14 @@ export class FilterView{
 
     renderSingleFilter(value, parent){
         const btn = document.createElement('button');
-        btn.textContent = value;
+        btn.textContent = this.convertToMany(value);
         btn.classList.add('btn');
         btn.classList.add('btn-warning');
+        btn.classList.add('btn-filter');
+        btn.classList.add('col-4');
+        btn.classList.add('col-sm-3');
+        btn.classList.add('col-lg-2');
+        btn.classList.add('col-xl-1');
         btn.classList.add('btn-filter');
         btn.addEventListener('click', (e)=>{
             e.preventDefault();
@@ -37,5 +42,19 @@ export class FilterView{
         });
         parent.appendChild(btn);
         return btn;
+    }
+
+    convertToMany(value){
+        const letters = ['a', 'i', 'o', 'u', 'ss', 's', 'x', 'z', 'ch', 'sh'];
+        const wordLength = value.length;
+        if(value == 'all') {
+            return value;
+        }
+        if(letters.includes(value[wordLength - 1]) || letters.includes(value[wordLength - 2] + value[wordLength - 1])){
+            value += 'es';
+        } else{
+            value += 's';
+        }
+        return value;
     }
 }

@@ -1,27 +1,60 @@
 *, head, body {margin: 0; padding: 0; outline: none; box-sizing: border-box; text-decoration: none; list-style: none}
-.navbar .right-section .cart-count{
-    width: 25px;
-    height: 25px;
-    background: #ffc000;
-    border-radius: 50%;
+body{
+    background: rgb(54, 59, 89);
+}
+.navbar .right-section form input{
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #ffffff;
+    border-radius: 0;
+}
+.navbar .right-section form input:focus{
+    border: none!important;
+    box-shadow: none!important;
+    border-bottom: 2px solid #ffffff!important;
     color: #ffffff;
 }
-.navbar .right-section .cart-count p{
-    margin-bottom: 2px !important;
+.navbar .right-section form input::-webkit-search-cancel-button{
+    -webkit-appearance: none;
+    height: 12px;
+    width: 12px;
+    background: url("../img/cross-icon.png");
+    cursor: pointer;
 }
-
-.navbar .right-section .cart{
-    font-size: 24px;
-    text-decoration: none;
-    margin-bottom: 7px;
-    transform: scale(1.0);
+.navbar .right-section .cart-box .cart{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-image: url("../img/cart-icon.png");
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: scale(1);
     transition: .5s;
 }
-.navbar .right-section .cart:hover{
-    transform: scale(1.2);
+.navbar .right-section .cart-box .cart:hover{
+    transform: scale(1.25);
+    cursor: pointer;
+}
+.navbar .right-section .cart-box .cart .cart-counter{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+.navbar .right-section .cart-box .cart .cart-counter p{
+    background: #ffc107;
+    font-size: 10px;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .filter{
-    border-bottom: 2px solid #a0a0a0;
+    border-bottom: 2px solid #fff;
     padding: 15px 0;
 }
 .filter .filter-search:focus{
@@ -29,33 +62,40 @@
     box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.35);
 }
 .filter .btn-filter{
-    font-weight: normal;
-    color: #000;
-    text-transform: uppercase;
-    /*border: 1px solid black!important;*/
     border: none!important;
-    background: #ffeb3b96!important;
-    min-width: 70px;
-    border-radius: 5px;
     box-shadow: none!important;
+    border-top: 2px solid transparent!important;
+    border-radius: 0px;
+    font-weight: normal;
+    font-size: 14px;
+    color: #fff;
+    text-transform: uppercase;
+    border-top: 2px solid #23272b;
+    background: transparent!important;
+    min-width: 50px;
     transition: .5s;
 }
 .filter .btn-filter.f-active{
-    background: #ffc000ab!important;
+    border-top: 2px solid #ffc000 !important;
+    font-weight: bold;
 }
 .filter .btn-filter:focus{
     box-shadow: none;
-    background: #ffc000ab;
-    border: 1px solid black;
+    border-top: 2px solid #ffc000ab;
 }
 .filter .btn-filter:hover{
-    background: #00ffad40!important;
+    border-top: 2px solid #00ffad40!important;
 }
 .filter .btn-filter.f-active:hover{
-    background: #ffc000ab!important;
+    border-top: 2px solid #ffc000ab!important;
+}
+.content{
+    padding: 5px 0;
 }
 .content .animals-list .card {
-    box-shadow: -2px 0px 7px -3px #000
+    box-shadow: -2px 0px 7px -3px #000;
+    background: #343a40;
+    color: #ffffff;
 }
 .content .animals-list .card .animal-img{
     width: 100%;
@@ -63,35 +103,44 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;
+    border-bottom: 2px solid #fff;
+}
+.content .animals-list .card .card-text{
+    color: #ffc000!important;
+    text-align: left;
+    margin-bottom: 0;
+}
+.content .animals-list .card .card-text>span{
+    color: #ffffff;
 }
 .content .animals-list .card .card-price{
+    margin-top: 15px;
     color: #c5c5c5!important;
     text-align: left;
     margin-bottom: 0;
 }
 .content .animals-list .card .btn-card:first-child{
-    border-radius: 10px 0 0 10px;
-    border: 2px solid #00ffac;
-    color: #00ffac;
+    border: 2px solid #607D8B;
+    color: #607D8B;
 }
 .content .animals-list .card .btn-card:first-child:hover{
     background: #fff;
     color: #ffffff;
-    background: #00ffac;
+    background: #607D8B;
 }
 .content .animals-list .card .btn-card:last-child{
-    border-radius: 0 10px 10px 0;
-    border: 2px solid #ffc000;
-    color: #ffc000
+    border: 2px solid #4e5ba9;
+    color: #4e5ba9
 }
 .content .animals-list .card .btn-card:last-child:hover{
     background: #fff;
     color: #fff;
-    background: #ffc000;
+    background: #4e5ba9;
 }
 .content .animals-list .card .btn-card{
     transition: .5s;
     text-transform: uppercase;
     color: #ffffff;
     font-size: 13px;
+    width: 40%!important;
 }
