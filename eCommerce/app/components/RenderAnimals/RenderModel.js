@@ -3,7 +3,10 @@ export class RenderModel {
     this.dataLink = 'https://antonpanchenk0.github.io/eAnimalShop/eCommerce/app/data/data.json';
     this.data = [];
     this.currentDataState = [];
-    this.filters = new Set();
+    this.filters = new Set(); // poprobovat' zamenit' na currentDataState v code
+
+    this.paginationCount = 4; // number of animals be rendered on page
+    this.paginationPage = 1; // number of page
   }
 
   get fSpecies(){
@@ -52,6 +55,31 @@ export class RenderModel {
       }
     }
     
-    return this.currentDataState;
+    return this.getPaginationData(this.currentDataState);
+  }
+
+  // выбрать из текущего состояния данных this.paginationCount элементов, для того, чтобы их отрендерить 
+  getPaginationData(where) {
+    switch(where) {
+      case 'next': {
+        this.paginationPage = this.currentDataState.length / this.paginationCount > this.paginationPage?
+          this.paginationPage + 1:
+          1;
+        break;
+      }
+      case 'prev': {
+        this.paginationPage = this.paginationPage === 1? 
+          Math.ceil(this.currentDataState.length / this.paginationCount): 
+          this.paginationPage - 1;
+        break;
+      }
+      default : {
+        this.paginationPage = 1;
+      }
+    }
+    const from = (this.paginationPage - 1) * this.paginationCount;
+    const to = this.paginationPage * this.paginationCount;
+
+    return this.currentDataState.slice(from, to);
   }
 }

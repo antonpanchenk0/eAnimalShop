@@ -10,13 +10,14 @@ export class RenderController {
 
     this.subscribe('search', this.renderFilterAnimals);
     this.subscribe('sort', this.renderSortAnimals);
+    this.subscribe('pagination', this.handlePagination);
 
     this.renderAnimals().then(()=>this.renderFilters()).then(()=> this.deletePreloader());
   }
 
   //Функция передачи полученных данных из модели в представление для подальшего рендера
   async renderAnimals(){
-    await this.model.getData().then(() => this.view.renderData(this.model.data));
+    await this.model.getData().then(() => this.view.renderData(this.model.getPaginationData(this.model.currentDataState)));
   }
 
   //Функция передачи данных о полученных фильтрах в FilterController для подальшего рендера
@@ -27,16 +28,23 @@ export class RenderController {
   //Функция перерендера данных в зависимости от установленных фильтров, принимает объект который хранит в себе значения фильтров
   renderFilterAnimals = (fObj) =>{
     const data = this.model.filterData(fObj);
-    this.view.renderData(data);
+    this.view.renderData(this.model.getPaginationData(data));
+    this.view.renderPageNum();
   }
 
   //Функция сортировки данных, которые в данный момент отрендерены
   renderSortAnimals = (id) => {
     this.view.renderData(this.model.sortData(id));
+    this.view.renderPageNum();
+  }
+
+  handlePagination = (where = 'next') => {
+    this.view.renderData(this.model.getPaginationData(where));
+    this.view.renderPageNum(this.model.paginationPage);
   }
 
   deletePreloader = () =>{
-      this.view.offPreloader();
+    this.view.offPreloader();
   }
 
 }
