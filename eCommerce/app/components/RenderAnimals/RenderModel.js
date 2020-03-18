@@ -2,7 +2,7 @@ export class RenderModel {
   constructor() {
     this.dataLink = 'https://antonpanchenk0.github.io/eAnimalShop/eCommerce/app/data/data.json';
     this.data = [];
-    this.dataForFilter = [];
+    this.currentDataState = [];
     this.filters = new Set();
   }
 
@@ -13,6 +13,7 @@ export class RenderModel {
   getData() {
     return fetch(this.dataLink).then(res => res.json()).then(arr => {
       this.data = arr.map(obj => obj);
+      this.currentDataState = arr.map(obj => obj);
       return arr;
     });
   }
@@ -25,10 +26,28 @@ export class RenderModel {
   filterData({inputSearch, activeBtn}){
     const regSearch_breed = new RegExp(inputSearch, 'i');
     const regSearch_species = new RegExp(activeBtn, 'i');
-    this.dataForFilter = this.data.filter(({breed, species})=>regSearch_breed.test(breed) && regSearch_species.test(species));
+    this.currentDataState = this.data.filter(({breed, species})=>regSearch_breed.test(breed) && regSearch_species.test(species));
     if(activeBtn == 'all'){
-      this.dataForFilter = this.data.filter(({breed})=>regSearch_breed.test(breed));
+      this.currentDataState = this.data.filter(({breed})=>regSearch_breed.test(breed));
     }
-    return this.dataForFilter;
+    return this.currentDataState;
+  }
+
+  sortData(id) {
+    switch(id) {
+      case 'PriceUp': {
+        this.currentDataState.sort((a, b) => a.price - b.price);
+        break;
+      }
+      case 'PriceDown': {
+        this.currentDataState.sort((a, b) => b.price - a.price);
+        break;
+      }
+      default: {
+        this.currentDataState.sort();
+      }
+    }
+    
+    return this.currentDataState;
   }
 }

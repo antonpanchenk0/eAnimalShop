@@ -9,6 +9,7 @@ export class RenderController {
     this.notify = notify;
 
     this.subscribe('search', this.renderFilterAnimals);
+    this.subscribe('sort', this.renderSortAnimals)
 
     this.renderAnimals().then(()=>this.renderFilters());
   }
@@ -23,8 +24,12 @@ export class RenderController {
   }
 
   renderFilterAnimals = (fObj) =>{
-      const data = this.model.filterData(fObj);
-      this.view.renderData(data);
+    const data = this.model.filterData(fObj);
+    this.view.renderData(data);
+  }
+
+  renderSortAnimals = (id) => {
+    this.view.renderData(this.model.sortData(id));
   }
 
 }
