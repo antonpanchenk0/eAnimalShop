@@ -1,2 +1,3 @@
-# eAnimalShop
- Animl Shop. SoftServe demo2
+# [eAnimalShop](https://antonpanchenk0.github.io/eAnimalShop/eCommerce/ "Lastest version")
+
+## SoftServe Demo2
