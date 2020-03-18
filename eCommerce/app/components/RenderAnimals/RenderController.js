@@ -11,7 +11,7 @@ export class RenderController {
     this.subscribe('search', this.renderFilterAnimals);
     this.subscribe('sort', this.renderSortAnimals);
 
-    this.renderAnimals().then(()=>this.renderFilters());
+    this.renderAnimals().then(()=>this.renderFilters()).then(()=> this.deletePreloader());
   }
 
   //Функция передачи полученных данных из модели в представление для подальшего рендера
@@ -33,6 +33,10 @@ export class RenderController {
   //Функция сортировки данных, которые в данный момент отрендерены
   renderSortAnimals = (id) => {
     this.view.renderData(this.model.sortData(id));
+  }
+
+  deletePreloader = () =>{
+      this.view.offPreloader();
   }
 
 }

@@ -1,6 +1,7 @@
 export class RenderView {
   constructor() {
     this.animalContainer = document.querySelector('#animalContainer');
+    this.loader = document.querySelector('div.loader');
   }
 
   //отображение всех карточек животных
@@ -29,5 +30,23 @@ export class RenderView {
             </div>
          </div>
     `;
+  }
+
+  offPreloader(){
+    this.fadeOut(this.loader, document.body);
+  }
+
+  fadeOut(node, parent){
+    const fadeStep = 1 / (1000 / 40);  //1-max opacity val, 1000 - 1 second, 30 - fps;
+    console.log(fadeStep)
+    let opacity = 1;
+    let interval = setInterval(()=>{
+      node.style.opacity = opacity;
+      opacity -= fadeStep;
+      if(opacity <= 0){
+        clearInterval(interval);
+        parent.removeChild(node);
+      }
+    }, 30); //30 - fps
   }
 }
