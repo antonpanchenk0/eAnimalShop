@@ -39,10 +39,10 @@ export class FilterView{
     //Событие на нажатие кнопки фильтра
     handleFilterClick = (e, value) =>{
         e.preventDefault();
-        e.target.classList.add('f-active');
-        if(this.activeFilter){
+        if(this.activeFilter && !e.target.classList.contains('f-active')){
             this.activeFilter.node.classList.remove('f-active');
         }
+        e.target.classList.add('f-active');
         this.activeFilter.name = value;
         this.activeFilter.node = e.target;
         this.handleUpdateDataByFilters();

@@ -6,6 +6,7 @@ body{
     background: transparent;
     border: none;
     border-bottom: 2px solid #ffffff;
+    color: #ffc107;
     border-radius: 0;
 }
 .navbar .right-section form input:focus{
@@ -21,6 +22,39 @@ body{
     background: url("../img/cross-icon.png");
     cursor: pointer;
 }
+.navbar .right-section .dropdown .sort-switch-btn{
+    background-color: #e3e3e3;
+    color: #000;
+    border: none!important;
+    box-shadow: none!important;
+    font-weight: 500;
+}
+.navbar .right-section .dropdown .sort-switch-btn:hover{
+    background-color: #fff;
+}
+.navbar .right-section .dropdown .sort-switch-btn:focus{
+    background-color: #fff;
+}
+.navbar .right-section .dropdown .sort-switch-btn.dropdown-toggle::after{
+    margin-left: 6px;
+    vertical-align: 2px;
+}
+.navbar .right-section .dropdown .dropdown-menu{
+    background: #fff;
+    padding: 0;
+}
+.navbar .right-section .dropdown .dropdown-menu .dropdown-item{
+    color: #000;
+    padding: 5px;
+    border-bottom: .5px solid #000;
+    transition: .3s;
+}
+.navbar .right-section .dropdown .dropdown-menu .dropdown-item:hover{
+    background: #e3e3e3;
+}
+.navbar .right-section .dropdown .dropdown-menu .dropdown-item:last-child{
+    border-bottom: none;
+}
 .navbar .right-section .cart-box .cart{
     position: relative;
     width: 40px;
@@ -30,6 +64,7 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     transform: scale(1);
+    user-select: none;
     transition: .5s;
 }
 .navbar .right-section .cart-box .cart:hover{
@@ -143,4 +178,23 @@ body{
     color: #ffffff;
     font-size: 13px;
     width: 40%!important;
+}
+.pagination .page-item .page-link{
+    border: none;
+    font-size: 16px;
+    background: transparent;
+    font-weight: bold;
+    color: #ffffff;
+    user-select: none;
+    box-shadow: none!important;
+    transform: scale(1);
+    transition: .1s;
+}
+.pagination .page-item .page-link:hover{
+    transform: scale(1.5);
+    background: transparent!important;
+}
+.pagination .page-item:nth-child(2) .page-link:hover{
+    transform: scale(1);
+    cursor: default;
 }

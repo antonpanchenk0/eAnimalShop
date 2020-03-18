@@ -8,6 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="./app/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/scroll.css">
   <link rel="stylesheet" href="./css/style.css">
   <title>Shop</title>
 </head>
@@ -22,8 +23,8 @@
       <div class="dropdown col-6 d-flex justify-content-center p-0">
         <a class="btn btn-secondary dropdown-toggle sort-switch-btn" href="#" role="button" id="sortDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Order by</a>
         <div class="dropdown-menu" aria-labelledby="sortDropDown">
-          <a data-id="PriceUp" class="dropdown-item sort-by my-sort" href="#">Price up</a>
-          <a data-id="PriceDown" class="dropdown-item sort-by my-sort" href="#">Price down</a>
+          <a data-id="PriceUp" class="dropdown-item sort-by" href="#">&#8593; Price up</a>
+          <a data-id="PriceDown" class="dropdown-item sort-by" href="#">&#8595; Price down</a>
         </div>
       </div>
       <div class="cart-box">
@@ -52,13 +53,13 @@
       <ul class="pagination justify-content-center">
         <li class="page-item">
           <a id="animalNavigationPrev" class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
+            <span aria-hidden="true">&#8701;</span>
           </a>
         </li>
         <li class="page-item"><a id="pageIndex" class="page-link" href="#">1</a></li>
         <li class="page-item">
           <a id="animalNavigationNext" class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
+            <span aria-hidden="true">&#8702;</span>
           </a>
         </li>
       </ul>
