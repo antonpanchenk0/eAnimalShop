@@ -9,25 +9,28 @@ export class RenderController {
     this.notify = notify;
 
     this.subscribe('search', this.renderFilterAnimals);
-    this.subscribe('sort', this.renderSortAnimals)
+    this.subscribe('sort', this.renderSortAnimals);
 
     this.renderAnimals().then(()=>this.renderFilters());
   }
 
+  //Функция передачи полученных данных из модели в представление для подальшего рендера
   async renderAnimals(){
     await this.model.getData().then(() => this.view.renderData(this.model.data));
   }
 
+  //Функция передачи данных о полученных фильтрах в FilterController для подальшего рендера
   renderFilters = () =>{
     this.model.getFilters().then(data=>this.notify('getFilters', data));
-    //Нужен ли после этого unsubscribe?
   }
 
+  //Функция перерендера данных в зависимости от установленных фильтров, принимает объект который хранит в себе значения фильтров
   renderFilterAnimals = (fObj) =>{
     const data = this.model.filterData(fObj);
     this.view.renderData(data);
   }
 
+  //Функция сортировки данных, которые в данный момент отрендерены
   renderSortAnimals = (id) => {
     this.view.renderData(this.model.sortData(id));
   }

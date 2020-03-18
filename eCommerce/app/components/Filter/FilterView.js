@@ -8,10 +8,17 @@ export class FilterView{
         this.handleUpdateDataByFilters = handleUpdateDataByFilters;
     }
 
+    //Возвращает значение InputSearch
     get dataInputValue(){
         return this.dataInput.value;
     }
 
+    //Возвращает значение
+    get activeFilterName(){
+        return this.activeFilter.name;
+    }
+
+    //Рендер фильтров в DOM
     renderFilters(data){
         this.renderSingleFilter('all', this.filterCountainer).classList.add('f-active');
         data.forEach(value=>this.renderSingleFilter(value, this.filterCountainer));
@@ -19,31 +26,29 @@ export class FilterView{
         this.activeFilter.value = 'all';
     }
 
+    //Создание Node кнопки фильтра
     renderSingleFilter(value, parent){
         const btn = document.createElement('button');
         btn.textContent = this.convertToMany(value);
-        btn.classList.add('btn');
-        btn.classList.add('btn-warning');
-        btn.classList.add('btn-filter');
-        btn.classList.add('col-4');
-        btn.classList.add('col-sm-3');
-        btn.classList.add('col-lg-2');
-        btn.classList.add('col-xl-1');
-        btn.classList.add('btn-filter');
-        btn.addEventListener('click', (e)=>{
-            e.preventDefault();
-            btn.classList.add('f-active');
-            if(this.activeFilter){
-                this.activeFilter.node.classList.remove('f-active');
-            }
-            this.activeFilter.name = value;
-            this.activeFilter.node = e.target;
-            this.handleUpdateDataByFilters();
-        });
+        btn.classList.add('btn', 'btn-warning', 'btn-filter', 'col-4', 'col-sm-3', 'col-lg-2', 'col-xl-1', 'btn-filter');
+        btn.addEventListener('click', (e) => this.handleFilterClick(e,value));
         parent.appendChild(btn);
         return btn;
     }
 
+    //Событие на нажатие кнопки фильтра
+    handleFilterClick = (e, value) =>{
+        e.preventDefault();
+        e.target.classList.add('f-active');
+        if(this.activeFilter){
+            this.activeFilter.node.classList.remove('f-active');
+        }
+        this.activeFilter.name = value;
+        this.activeFilter.node = e.target;
+        this.handleUpdateDataByFilters();
+    }
+
+    //Приведение значений фильтра в множественное число
     convertToMany(value){
         const letters = ['a', 'i', 'o', 'u', 'ss', 's', 'x', 'z', 'ch', 'sh'];
         const wordLength = value.length;

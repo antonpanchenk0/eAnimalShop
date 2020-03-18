@@ -3,10 +3,12 @@ export class RenderView {
     this.animalContainer = document.querySelector('#animalContainer');
   }
 
+  //отображение всех карточек животных
   renderData(arr) {
     this.animalContainer.innerHTML = arr.map(animal => this.renderSingleAnimal(animal)).join('');
   }
 
+  //Рендер карточки животного
   renderSingleAnimal({id, species, price, name, gender, weight, birth_date, color, breed, image, is_sterile, hair}) {
     const uName = name[0].toUpperCase() + name.slice(1);
     return `
