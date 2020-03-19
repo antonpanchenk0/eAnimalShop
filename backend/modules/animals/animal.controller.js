@@ -10,6 +10,15 @@ class AnimalController {
             next(e);
         }
     }
+
+    async getOneById(req, res, next){
+        try{
+            const animal = await animalService.getOneById(req.params.id);
+            res.json(animal);
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 const animalController = new AnimalController();
