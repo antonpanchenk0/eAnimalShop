@@ -10,13 +10,13 @@ export class FilterController {
     this.subscribe('getFilters', this.renderFilterBtn);
   }
 
-  //Функция вызова рендера фильров и дальнейшая отписка от события
+  //The function to call the render filter and further unsubscribe from the event
   renderFilterBtn = (data) => {
     this.view.renderFilters(data);
     this.unsubscribe('getFilters', this.renderFilterBtn);
   }
 
-  //Функция при езменнение значений фильтров, вызывает search и выполняет колбеки подписчиков
+  //When changing filter values, the function calls search and executes the callbacks of subscribers
   updateFiltersValueForRerender = () => {
     this.notify('search', {inputSearch: this.view.dataInputValue, activeBtn: this.view.activeFilterName});
   }

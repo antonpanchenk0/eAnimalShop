@@ -1,9 +1,9 @@
 export class RenderModel {
   constructor() {
     this.dataLink = 'https://antonpanchenk0.github.io/eAnimalShop/eCommerce/app/data/data.json';
-    this.data = [];
-    this.currentDataState = [];
-    this.filters = new Set(); // poprobovat' zamenit' na currentDataState v code
+    this.data = []; //default data
+    this.currentDataState = []; //currents state of data, after some filters sort or search
+    this.filters = new Set(); // set of filters values
 
     this.paginationCount = 4; // number of animals be rendered on page
     this.paginationPage = 1; // number of page
@@ -13,7 +13,7 @@ export class RenderModel {
     return this.filters;
   }
 
-  //Получение данных из базы (json)
+  //function get data from database
   getData() {
     return fetch(this.dataLink).then(res => res.json()).then(arr => {
       this.data = arr.map(obj => obj);
@@ -22,13 +22,13 @@ export class RenderModel {
     });
   }
 
-  //Вычисление всех видов животных, для создания фильтров
+  //Species count for render filters
   async getFilters(){
     this.data.forEach(item=>this.filters.add(item.species));
     return this.filters;
   }
 
-  //Фильтрация данных по Input и фыбранному фильтру
+  //Filters data by input search and filter btn
   filterData({inputSearch, activeBtn}){
     const regSearch_breed = new RegExp(inputSearch, 'i');
     const regSearch_species = new RegExp(activeBtn, 'i');
@@ -39,7 +39,7 @@ export class RenderModel {
     return this.currentDataState;
   }
 
-  //Сортировка данных
+  //Data sort
   sortData(id) {
     switch(id) {
       case 'PriceUp': {
@@ -58,7 +58,7 @@ export class RenderModel {
     return this.getPaginationData(this.currentDataState);
   }
 
-  // выбрать из текущего состояния данных this.paginationCount элементов, для того, чтобы их отрендерить 
+  // Select from currentDataState, amount of elements eq this.paginationCount, for render it
   getPaginationData(where) {
     switch(where) {
       case 'next': {

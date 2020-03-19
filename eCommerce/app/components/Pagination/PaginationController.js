@@ -6,7 +6,7 @@ export class PaginationController {
     this.notify = notify;
   }
 
-  //Вызывается при пагинации, оповещает всех подписчков события 'pagination'
+  //Called during pagination, notifies all subscribers of the 'pagination' event
   handlePagination = (ev) => {
     this.notify('pagination', ev.target.dataset.id);
   }

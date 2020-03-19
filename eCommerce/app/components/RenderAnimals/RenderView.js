@@ -5,12 +5,12 @@ export class RenderView {
     this.pageNum = document.querySelector('#pageIndex');
   }
 
-  //отображение всех карточек животных
+  //render all card into DOM
   renderData(arr) {
     this.animalContainer.innerHTML = arr.map(animal => this.renderSingleAnimal(animal)).join('');
   }
 
-  //Рендер карточки животного
+  //single card structure
   renderSingleAnimal({id, species, price, name, gender, weight, birth_date, color, breed, image, is_sterile, hair}) {
     const uName = name[0].toUpperCase() + name.slice(1);
     return `
