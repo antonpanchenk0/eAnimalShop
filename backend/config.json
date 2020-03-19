@@ -1,10 +1,10 @@
 {
-  "dataBase" : {
-    "name" : "AnimalShop",
-    "user": "root",
+  "db" : {
+    "name" : "animalShop",
+    "user": "postgres",
     "password": "root",
     "host": "localhost",
-    "port": 0,
+    "port": 5432,
     "dialect": "postgres"
   }
 }
