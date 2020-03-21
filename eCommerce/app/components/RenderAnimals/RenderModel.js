@@ -5,7 +5,7 @@ export class RenderModel {
     this.currentDataState = []; //currents state of data, after some filters sort or search
     this.filters = new Set(); // set of filters values
 
-    this.paginationCount = 4; // number of animals be rendered on page
+    this.paginationCount = 8; // number of animals be rendered on page
     this.paginationPage = 1; // number of page
   }
 
@@ -20,6 +20,11 @@ export class RenderModel {
       this.currentDataState = arr.map(obj => obj);
       return arr;
     });
+  }
+
+  //function get information about one animal
+  getSingleAnimal(id){
+    return this.data.find(animal => animal.id == id);
   }
 
   //Species count for render filters

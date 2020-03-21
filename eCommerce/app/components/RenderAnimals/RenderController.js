@@ -3,7 +3,7 @@ import { RenderModel } from './RenderModel.js';
 
 export class RenderController {
   constructor({subscribe, notify}) {
-    this.view = new RenderView();
+    this.view = new RenderView(this.handleDetails);
     this.model = new RenderModel();
     this.subscribe = subscribe;
     this.notify = notify;
@@ -47,6 +47,12 @@ export class RenderController {
   //off preloader function
   deletePreloader = () =>{
     this.view.offPreloader();
+  }
+
+  //details btn function. Show modal window with details
+  handleDetails = (id) =>{
+    const animal = this.model.getSingleAnimal(id);
+    this.notify('show-details-event', animal);
   }
 
 }

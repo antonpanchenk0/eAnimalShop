@@ -1,20 +1,26 @@
 export class RenderView {
-  constructor() {
+  constructor(detailsListener) {
     this.animalContainer = document.querySelector('#animalContainer');
     this.loader = document.querySelector('div.loader');
     this.pageNum = document.querySelector('#pageIndex');
+
+    this.detailsListener = detailsListener; //DetailsBtn eventListener callback
   }
 
   //render all card into DOM
   renderData(arr) {
-    this.animalContainer.innerHTML = arr.map(animal => this.renderSingleAnimal(animal)).join('');
+    this.animalContainer.innerHTML = ''; //Clear animalContainer
+    arr.forEach(elem => {
+      this.animalContainer.appendChild(this.renderSingleAnimal(elem));
+    });
   }
 
   //single card structure
-  renderSingleAnimal({id, species, price, name, gender, weight, birth_date, color, breed, image, is_sterile, hair}) {
+  renderSingleAnimal({id, species, name, image, price, gender, weight, birth_date, color, breed, is_sterile, hair, description}) {
     const uName = name[0].toUpperCase() + name.slice(1);
-    return `
-         <div class="col-12 col-sm-6 col-md-4 col-xl-3 p-2">
+    const node = document.createElement('div');
+    node.classList.add('col-12', 'col-sm-6', 'col-md-4', 'col-xl-3', 'p-2');
+    node.innerHTML = `
             <div class="card p-0">
                 <div class="animal-img" style="background-image: url('${image}')"></div>
                     <div class="card-body">
@@ -25,12 +31,16 @@ export class RenderView {
                     </div>
                     <div class="card-footer d-flex justify-content-around align-items-center p-1">
                         <a href="#" class="btn btn-card font-weight-bold">Add to cart</a>
-                        <a href="#" class="btn btn-card font-weight-bold" data-toggle="modal" data-target="#modalWindow">Details</a>
+                        <a href="#" class="btn btn-card font-weight-bold details-btn">Details</a>
                     </div>
                 </div>
             </div>
-         </div>
     `;
+    node.querySelector('a.details-btn').addEventListener('click', (ev)=>{
+      ev.preventDefault();
+      this.detailsListener(id)
+    });
+    return node;
   }
 
   renderPageNum(num = 1) {
