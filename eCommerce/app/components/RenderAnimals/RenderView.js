@@ -20,6 +20,7 @@ export class RenderView {
     const uName = name[0].toUpperCase() + name.slice(1);
     const node = document.createElement('div');
     node.classList.add('col-12', 'col-sm-6', 'col-md-4', 'col-xl-3', 'p-2');
+    node.setAttribute('data-id', id);
     node.innerHTML = `
             <div class="card p-0">
                 <div class="animal-img" style="background-image: url('${image}')"></div>
