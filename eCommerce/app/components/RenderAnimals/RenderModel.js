@@ -55,6 +55,14 @@ export class RenderModel {
         this.currentDataState.sort((a, b) => b.price - a.price);
         break;
       }
+      case 'AgeUp': {
+        this.currentDataState.sort((a, b) => a.birth_date - b.birth_date);
+        break;
+      }
+      case 'AgeDown': {
+        this.currentDataState.sort((a, b) => b.birth_date - a.birth_date);
+        break;
+      }
       default: {
         this.currentDataState.sort();
       }

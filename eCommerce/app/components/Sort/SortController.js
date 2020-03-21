@@ -8,6 +8,7 @@ export class SortController {
 
   //Вызывается при смене сортировки, оповещает всех подписчков события sort
   handleSort = (ev) => {
+    this.view.switchBtn.innerHTML = ev.target.dataset.id;
     this.notify('sort', ev.target.dataset.id);
   }
 }
