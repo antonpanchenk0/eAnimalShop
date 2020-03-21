@@ -44,14 +44,17 @@ export class RenderView {
     return node;
   }
 
+  //Render page by num
   renderPageNum(num = 1) {
     this.pageNum.innerHTML = `${num}`;
   }
 
+  //off preloader function
   offPreloader(){
     this.fadeOut(this.loader, document.body);
   }
 
+  //FadeOut preloader and remove from parent!!!
   fadeOut(node, parent){
     const fadeStep = 1 / (1000 / 40);  //1-max opacity val, 1000 - 1 second, 30 - fps;
     let opacity = 1;
