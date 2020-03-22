@@ -1,10 +1,11 @@
 export class DetailsButtonView{
-    constructor(closeListener){
+    constructor(closeListener, addToCartListener){
         this.modalWindow = document.querySelector('div.details-modal');
         this.modaTitle = this.modalWindow.querySelector('.modal-title');
         this.modalBody = this.modalWindow.querySelector('.modal-body');
+        this.modalFooter = this.modalWindow.querySelector('.modal-footer');
 
-
+        this.addToCartListener = addToCartListener;
         $(this.modalWindow).on('hidden.bs.modal', closeListener);
     }
 
@@ -47,6 +48,14 @@ export class DetailsButtonView{
           </div>
         `;
         this.modalBody.innerHTML = node;
+
+        //Bad practise???
+        this.modalFooter.innerHTML = `
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary modal-add-to-cart" data-dismiss="modal">Add to cart</button>
+        `;
+        this.modalFooter.querySelector('.modal-add-to-cart').addEventListener('click', (ev)=>{this.addToCartListener(data)});
+        //Bad practise???
         $(this.modalWindow).modal('show');
     }
 
