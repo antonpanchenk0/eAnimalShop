@@ -90,6 +90,16 @@ body{
     justify-content: center;
     align-items: center;
 }
+.navbar .cart-open{
+    opacity: 0;
+    z-index: 5;
+    position: absolute;
+    top: 56px;
+    right: 10px;
+    background: #ffffff;
+    width: 300px;
+    height: 450px;
+}
 
 /*Filters*/
 .filter.f-render{
@@ -353,4 +363,10 @@ body{
     74% { stroke: #32326e; }
     75% { stroke: #78325a; }
     99% { stroke: #78325a; }
+}
+
+@media screen and (max-width: 575px){
+    .navbar .cart-open{
+        top: 104px;
+    }
 }

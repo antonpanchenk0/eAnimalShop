@@ -3,7 +3,7 @@ import { RenderModel } from './RenderModel.js';
 
 export class RenderController {
   constructor({subscribe, notify}) {
-    this.view = new RenderView(this.handleDetails);
+    this.view = new RenderView(this.handleDetails, this.handleAddToCart);
     this.model = new RenderModel();
     this.subscribe = subscribe;
     this.notify = notify;
@@ -53,6 +53,12 @@ export class RenderController {
   handleDetails = (id) =>{
     const animal = this.model.getSingleAnimal(id);
     this.notify('show-details-event', animal);
+  }
+
+  //addToCart btn function. Add animal to cart data array
+  handleAddToCart = (id) =>{
+    const animal = this.model.getSingleAnimal(id);
+    this.notify('addToCart', animal);
   }
 
 }
