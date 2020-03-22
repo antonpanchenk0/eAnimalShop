@@ -3,7 +3,7 @@ import { RenderModel } from './RenderModel.js';
 
 export class RenderController {
   constructor({subscribe, notify}) {
-    this.view = new RenderView(this.handleDetails);
+    this.view = new RenderView(this.handleDetails, this.handleAddToCart);
     this.model = new RenderModel();
     this.subscribe = subscribe;
     this.notify = notify;
@@ -12,7 +12,7 @@ export class RenderController {
     this.subscribe('sort', this.renderSortAnimals);
     this.subscribe('pagination', this.handlePagination);
 
-    this.renderAnimals().then(()=>this.renderFilters()).then(()=> this.deletePreloader());
+    this.renderAnimals().then(()=>this.renderFilters()).then(()=>this.loadCart()).then(()=> this.deletePreloader());
   }
 
   //function of transferring the received data from the model to the view for a minor render
@@ -53,6 +53,18 @@ export class RenderController {
   handleDetails = (id) =>{
     const animal = this.model.getSingleAnimal(id);
     this.notify('show-details-event', animal);
+  }
+
+  //addToCart btn function. Add animal to cart data array
+  handleAddToCart = (id) =>{
+    const animal = this.model.getSingleAnimal(id);
+    this.notify('addToCart', animal);
+  }
+
+  //get cart data from storage, after loading page
+  loadCart = () =>{
+    const storage = JSON.parse(sessionStorage.getItem('cart'));
+    this.notify('loadCartFromSessionStorage', storage);
   }
 
 }

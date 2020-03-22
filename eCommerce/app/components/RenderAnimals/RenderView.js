@@ -1,10 +1,11 @@
 export class RenderView {
-  constructor(detailsListener) {
+  constructor(detailsListener, addToCartListener) {
     this.animalContainer = document.querySelector('#animalContainer');
     this.loader = document.querySelector('div.loader');
     this.pageNum = document.querySelector('#pageIndex');
 
     this.detailsListener = detailsListener; //DetailsBtn eventListener callback
+    this.addToCartListener = addToCartListener; //Add to cart button eventListener callback
   }
 
   //render all card into DOM
@@ -31,12 +32,18 @@ export class RenderView {
                         <p class="card-price">Price: ₴<span>${price}</span></p>
                     </div>
                     <div class="card-footer d-flex justify-content-around align-items-center p-1">
-                        <a href="#" class="btn btn-card font-weight-bold">Add to cart</a>
+                        <a href="#" class="btn btn-card font-weight-bold add-to-cart">Add to cart</a>
                         <a href="#" class="btn btn-card font-weight-bold details-btn">Details</a>
                     </div>
                 </div>
             </div>
     `;
+    //add listener to addCart button
+    node.querySelector('a.add-to-cart').addEventListener('click', (ev)=>{
+      ev.preventDefault();
+      this.addToCartListener(id);
+    });
+    //add listener to details button
     node.querySelector('a.details-btn').addEventListener('click', (ev)=>{
       ev.preventDefault();
       this.detailsListener(id)
@@ -59,8 +66,8 @@ export class RenderView {
     const fadeStep = 1 / (1000 / 40);  //1-max opacity val, 1000 - 1 second, 30 - fps;
     let opacity = 1;
     let interval = setInterval(()=>{
-      node.style.opacity = opacity;
       opacity -= fadeStep;
+      node.style.opacity = opacity;
       if(opacity <= 0){
         clearInterval(interval);
         parent.removeChild(node);
