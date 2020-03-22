@@ -12,7 +12,7 @@ export class RenderController {
     this.subscribe('sort', this.renderSortAnimals);
     this.subscribe('pagination', this.handlePagination);
 
-    this.renderAnimals().then(()=>this.renderFilters()).then(()=> this.deletePreloader());
+    this.renderAnimals().then(()=>this.renderFilters()).then(()=>this.loadCart()).then(()=> this.deletePreloader());
   }
 
   //function of transferring the received data from the model to the view for a minor render
@@ -59,6 +59,12 @@ export class RenderController {
   handleAddToCart = (id) =>{
     const animal = this.model.getSingleAnimal(id);
     this.notify('addToCart', animal);
+  }
+
+  //get cart data from storage, after loading page
+  loadCart = () =>{
+    const storage = JSON.parse(sessionStorage.getItem('cart'));
+    this.notify('loadCartFromSessionStorage', storage);
   }
 
 }
