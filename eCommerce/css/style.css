@@ -194,6 +194,7 @@ body{
     color: #ffffff;
     font-size: 13px;
     width: 40%!important;
+    box-shadow: none!important;
 }
 
 /*Pagination*/

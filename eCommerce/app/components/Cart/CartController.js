@@ -3,7 +3,7 @@ import {CartModel} from "./CartModel.js";
 
 export class CartController{
     constructor({subscribe}){
-        this.view = new CartView(this.openCart, this.closeCart);
+        this.view = new CartView(this.openCart, this.closeCart, this.incrementPosition, this.decrementPosition, this.deletePosition);
         this.model = new CartModel();
 
         this.subscribe = subscribe;
@@ -16,10 +16,28 @@ export class CartController{
         this.updateCartCounter();
     };
 
-
+    //update cart counter in DOM
     updateCartCounter = () =>{
         this.view.updateCartCounter(this.model.cartCounter);
     };
+
+    incrementPosition = (data) =>{
+        this.model.incrementPos(data);
+        this.updateCartCounter();
+        this.view.renderData(this.model.cartData, this.model.priceCounter);
+    }
+
+    decrementPosition = (data) =>{
+        this.model.decrementPos(data);
+        this.updateCartCounter();
+        this.view.renderData(this.model.cartData, this.model.priceCounter);
+    }
+
+    deletePosition = (data) =>{
+        this.model.deletePos(data);
+        this.updateCartCounter();
+        this.view.renderData(this.model.cartData, this.model.priceCounter);
+    }
 
     openCart = () =>{
         const data = this.model.cartData; //Get cart data

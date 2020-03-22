@@ -1,11 +1,14 @@
 export class CartView{
-    constructor(cartOpenListener, cartCloseListener){
+    constructor(cartOpenListener, cartCloseListener, incrementListener, decrementListener, deleteListener){
         this.cartBox = document.querySelector('div.cart');
         this.cartCounterBlock = document.querySelector('p#c-counter');
         this.cartModal = document.querySelector('div.cart-modal');
         this.cartModalHeader = this.cartModal.querySelector('.modal-title');
         this.cartModalBody = this.cartModal.querySelector('.modal-body');
 
+        this.incrementListener = incrementListener;
+        this.decrementListener = decrementListener;
+        this.deleteListener = deleteListener;
         this.cartBox.addEventListener('click', cartOpenListener);
         $(this.cartModal).on('hidden.bs.modal', cartCloseListener);
     }
@@ -14,7 +17,9 @@ export class CartView{
         this.cartCounterBlock.innerHTML = num;
     }
 
-    renderData = (data) =>{
+    renderData = (data, price) =>{
+        this.cartModalBody.innerHTML = '';
+        this.cartModalHeader.innerHTML = `🛒 <span style="color: #ffc000">Total price:  ${price}$ </span>🛒 `;
         data.forEach(item =>{this.cartModalBody.appendChild(this.renderSinglePosition(item))});
     }
 
@@ -39,12 +44,14 @@ export class CartView{
               </div>
         </div>
         `;
+        node.querySelector('a.count-switch[data-id="plus"]').addEventListener('click', e => {this.incrementListener(position.data)});
+        node.querySelector('a.count-switch[data-id="minus"]').addEventListener('click', e => {this.decrementListener(position.data)});
+        node.querySelector('a.rm-btn').addEventListener('click', e =>{e.preventDefault(); this.deleteListener(position.data)});
         return node;
     }
 
     open = (data, price) =>{
-        this.cartModalHeader.innerHTML = `🛒 <span style="color: #ffc000">Total price:  ${price}$ </span>🛒 `;
-        this.renderData(data);
+        this.renderData(data, price);
         $(this.cartModal).modal('show');
     };
 
