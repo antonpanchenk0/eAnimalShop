@@ -23,9 +23,8 @@ export class CartController{
 
     openCart = () =>{
         const data = this.model.cartData; //Get cart data
-        const counter = this.model.cartCounter; //Get count of cart element
         const price = this.model.priceCounter; //Get price all positions on cart
-        this.view.open(data, counter, price);
+        this.view.open(data, price);
     }
 
     closeCart = () =>{
