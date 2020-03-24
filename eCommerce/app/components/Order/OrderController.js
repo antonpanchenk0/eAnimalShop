@@ -2,9 +2,11 @@ import { OrderView } from "./OrderView.js";
 import { OrderModel } from "./OrderModel.js";
 
 export class OrderController {
-  constructor() {
+  constructor({notify}) {
     this.view = new OrderView(this.handleOrder);
     this.model = new OrderModel();
+
+    this.notify = notify;
   }
 
   handleOrder = () => {
@@ -16,6 +18,7 @@ export class OrderController {
       })
     ) {
       this.view.changeAnnotation('incorrect input, pls try again');
+      this.notify('confirmOrder', null);
     } else {
       this.model.orderMistake();
     }

@@ -1,16 +1,15 @@
 export class CartView {
-  constructor(cartOpenListener, cartCloseListener, incrementListener, decrementListener, deleteListener) {
+  constructor(cBacks) {
     this.cartBox = document.querySelector('div.cart');
     this.cartCounterBlock = document.querySelector('p#c-counter');
     this.cartModal = document.querySelector('div.cart-modal');
     this.cartModalHeader = this.cartModal.querySelector('.modal-title');
     this.cartModalBody = this.cartModal.querySelector('.modal-body');
 
-    this.incrementListener = incrementListener;
-    this.decrementListener = decrementListener;
-    this.deleteListener = deleteListener;
-    this.cartBox.addEventListener('click', cartOpenListener);
-    $(this.cartModal).on('hidden.bs.modal', cartCloseListener);
+    this.cBacks = cBacks; //object with callback functions from CartController
+
+    this.cartBox.addEventListener('click', this.cBacks.open);
+    $(this.cartModal).on('hidden.bs.modal', this.cBacks.close);
   }
 
   updateCartCounter = (num) => {
@@ -18,8 +17,8 @@ export class CartView {
   }
 
   renderData = (data, price) => {
-    this.cartModalBody.innerHTML = '';
     this.cartModalHeader.innerHTML = `🛒 <span style="color: #ffc000">Total price:  ${price}$ </span>🛒 `;
+    this.cartModalBody.innerHTML = '';
     data.forEach(item => {
       this.cartModalBody.appendChild(this.renderSinglePosition(item))
     });
@@ -36,25 +35,25 @@ export class CartView {
                 <p class="m-0 text-center">${position.data.price}$</p>
             </div>
             <div class="animal-toglers d-flex justify-content-center align-items-center">
-              <div class="switch-count d-flex justify-content-center align-items-center">
-              <a href="#" class="count-switch" data-id="minus">-</a>
+              <div class="switch-count-block d-flex justify-content-center align-items-center">
+              <a href="#" class="cart-count-switch-btn cart-decrement-btn" data-id="minus">-</a>
               <p class="count-now">${position.counter}</p>
-              <a href="#" class="count-switch" data-id="plus">+</a>
+              <a href="#" class="cart-count-switch-btn cart-increment-btn" data-id="plus">+</a>
               </div>
               <div class="remove-animal ml-3">
-                <a href="#" class="rm-btn">❌</a>
+                <a href="#" class="cart-remove-btn">❌</a>
               </div>
         </div>
         `;
-    node.querySelector('a.count-switch[data-id="plus"]').addEventListener('click', e => {
-      this.incrementListener(position.data)
+    node.querySelector('a.cart-increment-btn').addEventListener('click', e => {
+      this.cBacks.increment(position.data.id);
     });
-    node.querySelector('a.count-switch[data-id="minus"]').addEventListener('click', e => {
-      this.decrementListener(position.data)
+    node.querySelector('a.cart-decrement-btn').addEventListener('click', e => {
+      this.cBacks.decrement(position.data.id);
     });
-    node.querySelector('a.rm-btn').addEventListener('click', e => {
+    node.querySelector('a.cart-remove-btn').addEventListener('click', e => {
       e.preventDefault();
-      this.deleteListener(position.data)
+      this.cBacks.del(position.data.id);
     });
     return node;
   }

@@ -6,15 +6,22 @@ import {
 } from "./CartModel.js";
 
 export class CartController {
-  constructor({
-    subscribe
-  }) {
-    this.view = new CartView(this.openCart, this.closeCart, this.incrementPosition, this.decrementPosition, this.deletePosition);
+  constructor({subscribe}) {
+    this.view = new CartView({
+      open: this.openCart,
+      close: this.closeCart,
+      increment: this.incrementPosition,
+      decrement: this.decrementPosition,
+      del: this.deletePosition,
+    });
     this.model = new CartModel();
 
+
+    this.updateCartCounter();
     this.subscribe = subscribe;
     this.subscribe('addToCart', this.addToCart);
-    this.subscribe('loadCartFromSessionStorage', this.loadCart);
+    this.subscribe('confirmOrder', this.clearCart)
+    this.subscribe('transferData', this.catchData)
   }
 
   //add to cart new item
@@ -63,10 +70,17 @@ export class CartController {
     this.view.close();
   }
 
-  //load cart from sessionStorage
-  loadCart = (data) => {
-    this.model.load(data);
+  clearCart = () =>{
+    this.model.removeCartData();
+    this.model.updateSessionStorage(this.model.cartData);
     this.updateCartCounter();
-    this.view.renderData(this.model.cartData, this.model.calcSum); //arguments(current state of data in cart, current total price)
+    this.view.renderData(this.model.cartData, this.model.calcSum);
   }
+
+  //get main data from renderController
+  catchData = (data) =>{
+    this.model.catchData(data);
+    this.model.updateData();
+  }
+
 }

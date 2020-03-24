@@ -1,6 +1,7 @@
 export class CartModel {
   constructor() {
-    this.currentCartDataState = []; //arr of cart items
+    this.data = [];
+    this.currentCartDataState = JSON.parse(sessionStorage.getItem('cart')) || [];
   }
 
   //Getter number of cart positions
@@ -28,7 +29,7 @@ export class CartModel {
   add(data) {
     const cartLength = this.currentCartDataState.length;
     for (let i = 0; i < cartLength; i++) {
-      if (this.currentCartDataState[i].data === data) {
+      if (this.currentCartDataState[i].data.id === data.id) {
         this.currentCartDataState[i].counter++;
         return this.currentCartDataState;
       }
@@ -39,11 +40,15 @@ export class CartModel {
     });
   }
 
+  removeCartData(){
+    this.currentCartDataState = [];
+  }
+
   //Increment position in cart
-  incrementPos = (data) => {
+  incrementPos = (id) => {
     const cartLength = this.currentCartDataState.length;
     for (let i = 0; i < cartLength; i++) {
-      if (this.currentCartDataState[i].data === data) {
+      if (this.currentCartDataState[i].data.id === id) {
         this.currentCartDataState[i].counter++;
         return this.currentCartDataState;
       }
@@ -51,10 +56,10 @@ export class CartModel {
   }
 
   //Decrement position in cart
-  decrementPos = (data) => {
+  decrementPos = (id) => {
     const cartLength = this.currentCartDataState.length;
     for (let i = 0; i < cartLength; i++) {
-      if (this.currentCartDataState[i].data === data) {
+      if (this.currentCartDataState[i].data.id === id) {
         if (this.currentCartDataState[i].counter == 0) {
           return this.currentCartDataState;
         }
@@ -65,20 +70,37 @@ export class CartModel {
   }
 
   //Delete position in cart
-  deletePos = (data) => {
-    this.currentCartDataState = this.currentCartDataState.filter(item => item.data != data ? true : false);
-  }
-
-  //updating current data from sessionStorage
-  load = (data) => {
-    if (data) {
-      this.currentCartDataState = data;
-    }
+  deletePos = (id) => {
+    this.currentCartDataState = this.currentCartDataState.filter(item => item.data.id != id ? true : false);
   }
 
   //updating sessionStorage from current data
   updateSessionStorage = (data) => {
-    sessionStorage.setItem('cart', JSON.stringify(data));
+    const session = [];
+    data.forEach(elem=>{
+      session.push({id: elem.data.id, counter: elem.counter});
+    })
+    sessionStorage.setItem('cart', JSON.stringify(session));
+  }
+
+  //get main data from renderController
+  catchData = (data) =>{
+    this.data = data;
+  }
+
+  //updating data by session storage
+  updateData = () =>{
+    let tempData = [];
+    if(this.currentCartDataState.length){
+      this.data.map(item=>{
+        for(let i = 0; i < this.currentCartDataState.length; i++){
+          if(item.id === this.currentCartDataState[i].id){
+            tempData.push({data:item, counter: this.currentCartDataState[i].counter});
+          }
+        }
+      })
+    };
+    this.currentCartDataState  = tempData;
   }
 
 }
