@@ -303,7 +303,7 @@ body{
     color: #ffc107;
     font-weight: lighter;
 }
-.modal.cart-modal .modal-dialog .modal-content .modal-body .cart-item .animal-toglers .switch-count a{
+.modal.cart-modal .modal-dialog .modal-content .modal-body .cart-item .animal-toglers .switch-count-block a{
     display: flex;
     height: 20px;
     width: 20px;
@@ -316,7 +316,7 @@ body{
     font-weight: bold;
     border-radius: 50%;
 }
-.modal.cart-modal .modal-dialog .modal-content .modal-body .cart-item .animal-toglers .switch-count p{
+.modal.cart-modal .modal-dialog .modal-content .modal-body .cart-item .animal-toglers .switch-count-block p{
     font-size: 18px;
     color: #ffffff;
     margin: 0 5px;
@@ -334,7 +334,8 @@ body{
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 0;
+    z-index: 10;
+    background: rgb(54, 59, 89);
     display: flex;
     justify-content: center;
     align-items: center;

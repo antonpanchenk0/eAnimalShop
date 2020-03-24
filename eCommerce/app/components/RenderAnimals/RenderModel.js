@@ -9,10 +9,6 @@ export class RenderModel {
     this.paginationPage = 1; // number of page
   }
 
-  get fSpecies(){
-    return this.filters;
-  }
-
   //function get data from database
   getData() {
     return fetch(this.dataLink).then(res => res.json()).then(arr => {

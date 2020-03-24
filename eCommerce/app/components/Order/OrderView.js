@@ -6,9 +6,9 @@ export class OrderView {
     this.orderSuccess = document.querySelector('#orderSuccess');
     this.orderAnnotation = document.querySelector('#orderAnnotation');
 
-    this.checkout.addEventListener('click', () => this.orderForm.classList.remove('invisible'));
+    this.checkout.addEventListener('click', () => this.orderForm.classList.remove('d-none'));
     this.orderCansel.addEventListener('click', () => {
-      this.orderForm.classList.add('invisible');
+      this.orderForm.classList.add('d-none');
       this.changeAnnotation('Enter your credentials to submit the order');
     });
     this.orderSuccess.addEventListener('click', listener);
