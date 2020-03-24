@@ -11,6 +11,12 @@
   <link rel="stylesheet" href="./css/scroll.css">
   <link rel="stylesheet" href="./css/style.css">
   <title>Shop - Team Papa</title>
+
+  <style>
+    .invisible {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -111,8 +117,20 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Сheckout</button>
+          <button id="checkout" type="button" class="btn btn-primary">Сheckout</button>
+          
         </div>
+        <div id="orderAnnotation">Enter your credentials to submit the order</div>
+          <form id="cartForm" class="invisible">
+            <label for="customerName">Name:</label>
+            <input type="text" name="customerName" id="customerName" />
+            <label for="customerEmail">E-mail:</label>
+            <input type="email" name="customerEmail" id="customerEmail" />
+            <label for="customerPhone">Phone: </label>
+            <input type="text" name="customerPhone" id="customerPhone" />
+            <button id="orderSuccess" type="button">Order!</button>
+            <button id="orderCansel" type="button">Cansel</button>
+          </form>
       </div>
     </div>
   </div>
