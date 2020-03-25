@@ -61,10 +61,10 @@ export class CartModel {
     const cartLength = this.currentCartDataState.length;
     for (let i = 0; i < cartLength; i++) {
       if (this.currentCartDataState[i].data.id === id) {
-        if (this.currentCartDataState[i].counter == 0) {
-          return this.currentCartDataState;
-        }
         this.currentCartDataState[i].counter--;
+        if (this.currentCartDataState[i].counter == 0) {
+          return this.deletePos(id);
+        }
         return this.currentCartDataState;
       }
     }
