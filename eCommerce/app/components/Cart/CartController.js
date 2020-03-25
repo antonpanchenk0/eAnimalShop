@@ -6,7 +6,7 @@ import {
 } from "./CartModel.js";
 
 export class CartController {
-  constructor({subscribe}) {
+  constructor({subscribe, notify}) {
     this.view = new CartView({
       open: this.openCart,
       close: this.closeCart,
@@ -19,6 +19,7 @@ export class CartController {
 
     this.updateCartCounter();
     this.subscribe = subscribe;
+    this.notify = notify;
     this.subscribe('addToCart', this.addToCart);
     this.subscribe('confirmOrder', this.clearCart);
     this.subscribe('transferData', this.catchData);
@@ -68,6 +69,7 @@ export class CartController {
   //close cart
   closeCart = () => {
     this.view.close();
+    this.notify('cartClose', null);
   }
 
   clearCart = () =>{

@@ -2,11 +2,13 @@ import { OrderView } from "./OrderView.js";
 import { OrderModel } from "./OrderModel.js";
 
 export class OrderController {
-  constructor({notify}) {
-    this.view = new OrderView(this.handleOrder);
+  constructor({subscribe,notify}) {
+    this.view = new OrderView(this.handleOrder, this.closeOrder);
     this.model = new OrderModel();
 
     this.notify = notify;
+    this.subscribe = subscribe;
+    this.subscribe('cartClose', this.closeOrder)
   }
 
   handleOrder = () => {
@@ -21,5 +23,9 @@ export class OrderController {
     } else {
       this.view.changeAnnotation(this.view.mistakeMsg);
     }
+  }
+
+  closeOrder = () =>{
+    this.view.closeForm();
   }
 }

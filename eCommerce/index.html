@@ -114,17 +114,24 @@
           <button id="checkout" type="button" class="btn btn-primary">Сheckout</button>
           
         </div>
-        <div id="orderAnnotation" class="d-none">Enter your credentials to submit the order</div>
-          <form id="cartForm" class="d-none">
-            <label for="customerName">Name:</label>
-            <input type="text" name="customerName" id="customerName" />
-            <label for="customerEmail">E-mail:</label>
-            <input type="email" name="customerEmail" id="customerEmail" />
-            <label for="customerPhone">Phone: </label>
-            <input type="text" name="customerPhone" id="customerPhone" />
-            <button id="orderSuccess" type="button">Order!</button>
-            <button id="orderCansel" type="button">Cansel</button>
+        <div class="cart-order-block d-none" id="orderBlock">
+          <div id="orderAnnotation" class="col-12 text-center"><h3 class="annotation-title">Enter your credentials to submit the order</h3></div>
+          <form id="cartForm" class="row m-0">
+            <div class="form-group col-12 p-0 d-flex justify-content-center my-2">
+              <input type="text" name="customerName" id="customerName" placeholder="Name" class="w-100 col-8"/>
+            </div>
+            <div class="form-group col-12 p-0 d-flex justify-content-center my-2">
+              <input type="email" name="customerEmail" id="customerEmail" placeholder="E-mail" class="w-100 col-8"/>
+            </div>
+            <div class="form-group col-12 p-0 d-flex justify-content-center my-2">
+              <input type="text" name="customerPhone" id="customerPhone" placeholder="Phone number" class="w-100 col-8"/>
+            </div>
+            <div class="col-12 d-flex justify-content-end cart-order-block-footer">
+              <button id="orderCancel" type="button" class="btn btn-secondary">Cancel</button>
+              <button id="orderSuccess" type="button" class="btn btn-primary">Order!</button>
+            </div>
           </form>
+        </div>
       </div>
     </div>
   </div>
