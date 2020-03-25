@@ -6,7 +6,7 @@ export class DetailsButtonView{
         this.modalFooter = this.modalWindow.querySelector('.modal-footer');
 
         this.addToCartListener = addToCartListener;
-        $(this.modalWindow).on('hidden.bs.modal', closeListener);
+        $(this.modalWindow).on('hidden.bs.modal', closeListener); //bootstrap4 modalWindow close event
     }
 
     show(data){

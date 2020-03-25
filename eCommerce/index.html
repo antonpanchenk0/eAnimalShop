@@ -6,6 +6,7 @@
   <meta name="viewport"
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./app/fontawesome/c9017e5f7c.js" crossorigin="anonymous"></script>
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="./app/bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="./css/scroll.css">
@@ -21,10 +22,10 @@
       <polyline class="line-cornered stroke-animation" points="0,0 100,0 100,100" stroke-width="10" fill="none"></polyline>
       <polyline class="line-cornered stroke-animation" points="0,0 0,100 100,100" stroke-width="10" fill="none"></polyline>
     </svg>
-    <h1>🐾</h1>
+    <h1><i class="fas fa-paw" style="line-height: inherit"></i></h1>
   </div>
   <nav class="navbar navbar-dark bg-dark justify-content-between">
-    <a class="navbar-brand mb-2 m-sm-0 col-12 col-sm-auto d-flex justify-content-center" href="#">&#128021;PetShop</a>
+    <a class="navbar-brand mb-2 m-sm-0 col-12 col-sm-auto d-flex justify-content-center" href="#"><i class="fa fa-dog" style="line-height: inherit"></i>&nbsp;PetShop</a>
     <div class="right-section d-flex justify-content-center align-items-center col-12 col-sm-auto">
       <form class="form-inline mb-sm-0 my-lg-0 m-0 col-6 justify-content-center">
         <input class="form-control filter-search" type="search" placeholder="Search..." aria-label="Search">
@@ -78,6 +79,7 @@
     </nav>
   </div>
 
+<!--Details modalWindow-->
   <div class="modal fade bd-example-modal-lg details-modal" id="modalWindow" tabindex="-1" role="dialog" aria-labelledby="modalWindowLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -97,6 +99,7 @@
     </div>
   </div>
 
+<!--Cart modal Window-->
   <div class="modal fade  cart-modal" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel"
        aria-hidden="true">
     <div class="modal-dialog " role="document">
@@ -112,7 +115,6 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button id="checkout" type="button" class="btn btn-primary">Сheckout</button>
-          
         </div>
         <div class="cart-order-block d-none" id="orderBlock">
           <div id="orderAnnotation" class="col-12 text-center"><h3 class="annotation-title">Enter your credentials to submit the order</h3></div>
@@ -135,10 +137,24 @@
       </div>
     </div>
   </div>
+
+<!--Notifications-->
+  <div aria-live="polite" aria-atomic="true" class="popup">
+    <div class="toast" data-delay="10000">
+      <div class="toast-header">
+        <strong class="mr-auto toast-title">&#128021; Notification</strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+        <p class="m-0 body-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, harum?</p>
+      </div>
+    </div>
+  </div>
   <script src="./app/bootstrap/jquery-3.4.1.slim.min.js"></script>
   <script src="./app/bootstrap/popper.min.js"></script>
   <script src="./app/bootstrap/bootstrap.min.js"></script>
   <script src="./app/main.js" type="module"></script>
 </body>
-
 </html>

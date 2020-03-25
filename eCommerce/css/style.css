@@ -332,13 +332,21 @@ body{
     border-top: 2px solid #ffffff;
 }
 
+.modal.cart-modal .modal-content .cart-order-block .annotation-title {
+    font-size: 18px;
+    color: #ffffff;
+    padding: 10px;
+    margin: 0;
+    font-weight: lighter;
+}
+
 .modal.cart-modal .modal-content .cart-order-block form .form-group input{
-    border: 2px solid #ffffff;
+    border: 1px solid #ffffff;
     border-radius: 5px;
     background: none;
     box-shadow: none;
     color: #fff;
-    font-weight: bold;
+    font-weight: lighter;
     padding: 0 5px;
     height: 38px;
 }
@@ -352,6 +360,29 @@ body{
 }
 .modal.cart-modal .modal-content .cart-order-block .cart-order-block-footer>*{
     margin: .25rem;
+}
+.popup{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    height: auto;
+    z-index: 10000;
+}
+.popup .toast{
+    position: absolute;
+    min-width: 250px;
+    max-width: 300px;
+    bottom: 10px;
+    right: 10px;
+}
+.popup .toast .toast-header span:focus{
+    box-shadow: none;
+    border: none;
+}
+.popup .toast .toast-body p{
+    font-weight: 500;
+    text-align: center;
 }
 
 .loader{
