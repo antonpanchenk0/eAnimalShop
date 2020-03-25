@@ -20,8 +20,8 @@ export class CartController {
     this.updateCartCounter();
     this.subscribe = subscribe;
     this.subscribe('addToCart', this.addToCart);
-    this.subscribe('confirmOrder', this.clearCart)
-    this.subscribe('transferData', this.catchData)
+    this.subscribe('confirmOrder', this.clearCart);
+    this.subscribe('transferData', this.catchData);
   }
 
   //add to cart new item

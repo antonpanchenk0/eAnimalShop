@@ -17,10 +17,9 @@ export class OrderController {
         phone: this.view.orderForm.customerPhone.value,
       })
     ) {
-      this.view.changeAnnotation('incorrect input, pls try again');
       this.notify('confirmOrder', null);
     } else {
-      this.model.orderMistake();
+      this.view.changeAnnotation(this.view.mistakeMsg);
     }
   }
 }

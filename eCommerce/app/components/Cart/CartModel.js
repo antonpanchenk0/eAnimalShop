@@ -2,6 +2,7 @@ export class CartModel {
   constructor() {
     this.data = [];
     this.currentCartDataState = JSON.parse(sessionStorage.getItem('cart')) || [];
+    console.log(this.currentCartDataState);
   }
 
   //Getter number of cart positions

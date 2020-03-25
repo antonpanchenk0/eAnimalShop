@@ -8,7 +8,6 @@ export class OrderModel {
   }
 
   validateName(name) {
-    console.log(name.length);
     if(!name.length) {
       return false
     }
@@ -30,10 +29,5 @@ export class OrderModel {
     }
     
     return true;
-  }
-  
-
-  orderMistake() {
-    orderAnnotation.innerText = 'incorrect input, pls try again';
   }
 }
