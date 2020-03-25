@@ -353,6 +353,29 @@ body{
 .modal.cart-modal .modal-content .cart-order-block .cart-order-block-footer>*{
     margin: .25rem;
 }
+.popup{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    height: auto;
+    z-index: 10000;
+}
+.popup .toast{
+    position: absolute;
+    min-width: 250px;
+    max-width: 300px;
+    bottom: 10px;
+    right: 10px;
+}
+.popup .toast .toast-header span:focus{
+    box-shadow: none;
+    border: none;
+}
+.popup .toast .toast-body p{
+    font-weight: 500;
+    text-align: center;
+}
 
 .loader{
     width: 100%;

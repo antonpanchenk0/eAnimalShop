@@ -9,7 +9,7 @@ export class CartView {
     this.cBacks = cBacks; //object with callback functions from CartController
 
     this.cartBox.addEventListener('click', this.cBacks.open);
-    $(this.cartModal).on('hidden.bs.modal', this.cBacks.close);
+    $(this.cartModal).on('hidden.bs.modal', this.cBacks.close); //bootstrap4 modalWindow close event
   }
 
   updateCartCounter = (num) => {
