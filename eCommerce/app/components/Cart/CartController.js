@@ -47,7 +47,7 @@ export class CartController {
 
   //decrementing position  in cart
   decrementPosition = (data) => {
-    this.model.decrementPos(data);
+    const res = this.model.decrementPos(data);
     this.model.updateSessionStorage(this.model.cartData);
     this.updateCartCounter();
     this.view.renderData(this.model.cartData, this.model.calcSum); //arguments(current state of data in cart, current total price)
