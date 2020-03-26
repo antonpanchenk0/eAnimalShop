@@ -1,6 +1,6 @@
 export class RenderModel {
   constructor() {
-    this.dataLink = 'https://antonpanchenk0.github.io/eAnimalShop/eCommerce/app/data/data.json';
+    this.dataLink = 'http://localhost:3003/animals';
     this.data = []; //default data
     this.currentDataState = []; //currents state of data, after some filters sort or search
     this.filters = new Set(); // set of filters values

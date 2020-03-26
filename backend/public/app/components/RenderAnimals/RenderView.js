@@ -24,7 +24,7 @@ export class RenderView {
     node.setAttribute('data-id', id);
     node.innerHTML = `
             <div class="card p-0">
-                <div class="animal-img" style="background-image: url('${image}')"></div>
+                <div class="animal-img" style="background-image: url('../../../../images/animal_id_1.jpg')"></div>
                     <div class="card-body">
                         <h5 class="card-title">${uName}</h5>
                         <p class="card-text">Breed: <span>${breed}</span></p>

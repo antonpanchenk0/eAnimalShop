@@ -7,6 +7,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.use(express.static('public'));
 
 app.use('/animals', require('./modules/animals/animals.routes'));
 app.use(errorHandler);
