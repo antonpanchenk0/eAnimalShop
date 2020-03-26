@@ -17,7 +17,7 @@ export class CartView {
   }
 
   renderData = (data, price) => {
-    this.cartModalHeader.innerHTML = `<i class="fa fa-cart-arrow-down"></i> <span style="color: #ffc000">Total price:  ${price}$ </span><i class="fa fa-cart-arrow-down"></i>`;
+    this.cartModalHeader.innerHTML = `<i class="fa fa-cart-arrow-down"></i> <span style="color: #ffc000">Total price:  ${price.toFixed(2)}$ </span><i class="fa fa-cart-arrow-down"></i>`;
     this.cartModalBody.innerHTML = '';
     data.forEach(item => {
       this.cartModalBody.appendChild(this.renderSinglePosition(item))
