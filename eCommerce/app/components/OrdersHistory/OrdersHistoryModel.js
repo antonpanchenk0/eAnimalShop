@@ -1,10 +1,15 @@
 export class OrdersHistoryModel {
     constructor(){
         this.mainData = [];
+        this.history = [];
     }
 
     get historyList(){
         return this.history;
+    }
+
+    get historyCount(){
+        return this.history.length;
     }
 
     setMainData = (data) =>{
@@ -13,7 +18,6 @@ export class OrdersHistoryModel {
 
     update = () =>{
         this.history = JSON.parse(localStorage.getItem('ordersHistory')) || [];
-        console.log('update', this.history)
         let convertData = [];
         let tempOrderData = [];
         if(this.history.length){

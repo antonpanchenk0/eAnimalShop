@@ -363,6 +363,26 @@ body{
 .modal.cart-modal .modal-content .cart-order-block .cart-order-block-footer>*{
     margin: .25rem;
 }
+
+.order-list-modal .modal-content{
+    background: rgb(54, 59, 89);
+}
+.order-list-modal .modal-content .modal-header h5{
+    color: #ffffff;
+    text-transform: uppercase;
+}
+.order-list-modal .modal-content .modal-body .order-item{
+    border-bottom: 2px solid #ffffff;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+.order-list-modal .modal-content .modal-body .order-item:last-child{
+    border-bottom: 0px solid #ffffff;
+    margin-bottom: 0px;
+}
+.order-list-modal .modal-content .modal-body .order-item p{
+    margin: 5px 0;
+}
 .popup{
     position: fixed;
     width: 100%;
