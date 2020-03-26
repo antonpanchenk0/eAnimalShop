@@ -1,7 +1,7 @@
 export class CartView {
   constructor(cBacks) {
     this.cartBox = document.querySelector('div.cart');
-    this.cartCounterBlock = document.querySelector('p#c-counter');
+    this.cartCounterBlock = document.querySelector('p#cCounter');
     this.cartModal = document.querySelector('div.cart-modal');
     this.cartModalHeader = this.cartModal.querySelector('.modal-title');
     this.cartModalBody = this.cartModal.querySelector('.modal-body');
@@ -66,6 +66,7 @@ export class CartView {
   close() {
     this.cartModalBody.innerHTML = '';
     this.cartModalHeader.innerHTML = '';
+    $(this.cartModal).modal('hide');
   }
 
 }

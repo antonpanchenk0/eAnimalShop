@@ -6,7 +6,9 @@ import {DetailsButtonController} from "./components/DetailsButton/DetailsButtonC
 import {CartController} from "./components/Cart/CartController.js";
 import {OrderController} from "./components/Order/OrderController.js";
 import {AnnotationPopUpController} from "./components/AnnotationPopUp/AnnotationPopUpController.js";
+import {OrdersHistoryController} from "./components/OrdersHistory/OrdersHistoryController.js";
 import {Publisher} from "./helpers/Publisher.js";
+
 
 
 const publisher = new Publisher();
@@ -18,3 +20,4 @@ const details = new DetailsButtonController(publisher.methods);
 const cart = new CartController(publisher.methods);
 const orders = new OrderController(publisher.methods);
 const annotation = new AnnotationPopUpController(publisher.methods);
+const history = new OrdersHistoryController(publisher.methods);

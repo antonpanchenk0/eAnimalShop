@@ -7,7 +7,7 @@ export class AnnotationPopUpView {
     }
 
     render = (data) =>{
-        this.annotationPopupBodyTitle.innerHTML;
+        this.annotationPopupBodyTitle.innerHTML = data;
         $(this.popUp).toast('show'); //bootstrap4 toast show method
     }
 

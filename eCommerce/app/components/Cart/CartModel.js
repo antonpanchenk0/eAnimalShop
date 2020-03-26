@@ -2,7 +2,6 @@ export class CartModel {
   constructor() {
     this.data = [];
     this.currentCartDataState = JSON.parse(sessionStorage.getItem('cart')) || [];
-    console.log(this.currentCartDataState);
   }
 
   //Getter number of cart positions
@@ -24,6 +23,14 @@ export class CartModel {
   //Getter data of cart
   get cartData() {
     return this.currentCartDataState;
+  }
+
+  get shortCartData(){
+    const temp = [];
+    this.currentCartDataState.forEach(elem=>{
+      temp.push({id: elem.data.id, counter: elem.counter});
+    })
+    return temp;
   }
 
   //Add new position to cart
@@ -76,11 +83,8 @@ export class CartModel {
   }
 
   //updating sessionStorage from current data
-  updateSessionStorage = (data) => {
-    const session = [];
-    data.forEach(elem=>{
-      session.push({id: elem.data.id, counter: elem.counter});
-    })
+  updateSessionStorage = () => {
+    const session = this.shortCartData;
     sessionStorage.setItem('cart', JSON.stringify(session));
   }
 

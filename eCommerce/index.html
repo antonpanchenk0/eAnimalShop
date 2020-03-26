@@ -27,10 +27,10 @@
   <nav class="navbar navbar-dark bg-dark justify-content-between">
     <a class="navbar-brand mb-2 m-sm-0 col-12 col-sm-auto d-flex justify-content-center" href="#"><i class="fa fa-dog" style="line-height: inherit"></i>&nbsp;PetShop</a>
     <div class="right-section d-flex justify-content-center align-items-center col-12 col-sm-auto">
-      <form class="form-inline mb-sm-0 my-lg-0 m-0 col-6 justify-content-center">
+      <form class="form-inline mb-sm-0 my-lg-0 m-0 col-5 justify-content-center">
         <input class="form-control filter-search" type="search" placeholder="Search..." aria-label="Search">
       </form>
-      <div class="dropdown col-6 d-flex justify-content-center p-0">
+      <div class="dropdown col-5 d-flex justify-content-center p-0">
         <a class="btn btn-secondary dropdown-toggle sort-switch-btn" href="#" role="button" id="sortDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Order by</a>
         <div class="dropdown-menu" aria-labelledby="sortDropDown">
           <a data-id="PriceUp" class="dropdown-item sort-by" href="#">&#8593; Price up</a>
@@ -39,13 +39,17 @@
           <a data-id="AgeDown" class="dropdown-item sort-by" href="#">&#8595; Age down</a>
         </div>
       </div>
+      <div class="oder-list-box" id="orderListBox">
+        <div class="order-list">
+          <div class="order-list-counter"><p id="oCounter" class="m-0">0</p></div>
+        </div>
+      </div>
       <div class="cart-box">
         <div class="cart">
-          <div class="cart-counter"><p id="c-counter" class="m-0">0</p></div>
+          <div class="cart-counter"><p id="cCounter" class="m-0">0</p></div>
         </div>
       </div>
     </div>
-    <div class="cart-open"></div>
   </nav>
   <div class="container-fluid row root m-0">
     <div class="col-12 filter">
@@ -117,16 +121,16 @@
           <button id="checkout" type="button" class="btn btn-primary">Сheckout</button>
         </div>
         <div class="cart-order-block d-none" id="orderBlock">
-          <div id="orderAnnotation" class="col-12 text-center"><h3 class="annotation-title">Enter your credentials to submit the order</h3></div>
+          <div class="col-12 text-center"><h3 class="annotation-title">Enter your credentials to submit the order</h3></div>
           <form id="cartForm" class="row m-0">
             <div class="form-group col-12 p-0 d-flex justify-content-center my-2">
-              <input type="text" name="customerName" id="customerName" placeholder="Name" class="w-100 col-8"/>
+              <input type="text" name="customerName" id="customerName" placeholder="Alan" class="w-100 col-8"/>
             </div>
             <div class="form-group col-12 p-0 d-flex justify-content-center my-2">
-              <input type="email" name="customerEmail" id="customerEmail" placeholder="E-mail" class="w-100 col-8"/>
+              <input type="email" name="customerEmail" id="customerEmail" placeholder="mail@something.com" class="w-100 col-8"/>
             </div>
             <div class="form-group col-12 p-0 d-flex justify-content-center my-2">
-              <input type="text" name="customerPhone" id="customerPhone" placeholder="Phone number" class="w-100 col-8"/>
+              <input type="text" name="customerPhone" id="customerPhone" placeholder="380991234567" class="w-100 col-8"/>
             </div>
             <div class="col-12 d-flex justify-content-end cart-order-block-footer">
               <button id="orderCancel" type="button" class="btn btn-secondary">Cancel</button>
@@ -138,17 +142,37 @@
     </div>
   </div>
 
+<!--Orders History ModalWindow-->
+  <div class="modal fade bd-example-modal-lg order-list-modal" id="orderListModalWindow" tabindex="-1" role="dialog" aria-labelledby="orderListModalWindowLabel"
+       aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="orderListModalWindowLabel">Orders history</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <!--Notifications-->
   <div aria-live="polite" aria-atomic="true" class="popup">
     <div class="toast" data-delay="10000">
       <div class="toast-header">
-        <strong class="mr-auto toast-title">&#128021; Notification</strong>
+        <strong class="mr-auto toast-title"><i class="fa fa-dog" style="line-height: inherit"></i>&nbsp;Notification</strong>
         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="toast-body">
-        <p class="m-0 body-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, harum?</p>
+        <p class="m-0 body-title"></p>
       </div>
     </div>
   </div>

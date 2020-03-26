@@ -1,37 +1,25 @@
 export class OrderView {
-  constructor(listener, closeListener) {
+  constructor(listener, closeListener, getDataListener) {
     this.checkout = document.querySelector('#checkout');
     this.orderBlock = document.querySelector('#orderBlock');
     this.orderForm = document.querySelector('#cartForm');
     this.orderCancel = document.querySelector('#orderCancel');
     this.orderSuccess = document.querySelector('#orderSuccess');
-    this.orderAnnotation = document.querySelector('#orderAnnotation .annotation-title');
 
-    this.mistakeMsg = 'Incorrect input, pls try again';
-    this.defaultMsg = 'Enter your credentials to submit the order';
-    this.successMsg = 'Your order is done, thank you! Maybe another one?';
 
-    this.checkout.addEventListener('click', () => {
-      // making form and msg visible
-      this.orderBlock.classList.remove('d-none');
-      // this.orderForm.classList.remove('d-none');
-      // this.orderAnnotation.classList.remove('d-none');
-
-      this.changeAnnotation(this.defaultMsg);
-      
-    });
+    this.checkout.addEventListener('click', this.showForm);
 
     this.orderCancel.addEventListener('click', closeListener);
 
-    this.orderSuccess.addEventListener('click', () => {
-      listener();
-      this.clearInputs(); 
-    });
+    this.orderSuccess.addEventListener('click', () => { getDataListener(); listener(); });
   }
 
-  // changing msg that customer see
-  changeAnnotation(msg) {
-    this.orderAnnotation.innerText = `${msg}`;
+  get inputsData(){
+    return {
+      name: this.orderForm.customerName.value,
+      email: this.orderForm.customerEmail.value,
+      phone: this.orderForm.customerPhone.value,
+    }
   }
 
   // making input values clear after submitting or canceling
@@ -41,13 +29,13 @@ export class OrderView {
     this.orderForm.customerName.value = '';
   }
 
+  showForm = () =>{
+    this.orderBlock.classList.remove('d-none');
+  }
+
   closeForm(){
     // making form and msg invisible
     this.orderBlock.classList.add('d-none');
-    // this.orderForm.classList.add('d-none');
-    // this.orderAnnotation.classList.add('d-none');
-
-    this.changeAnnotation(this.defaultMsg);
     this.clearInputs();
   }
 }
