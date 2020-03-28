@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 app.use('/', express.static('public'));
 app.use('/animals', require('./modules/animals/animals.routes'));
-
+app.use('/page', require('./modules/pages/pages.routes'));
 
 app.use(errorHandler);
 
