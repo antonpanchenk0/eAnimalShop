@@ -27,10 +27,13 @@ export class OrderModel {
   saveOrderDataToLocalStorage = ({name, email, phone}) =>{
     const temp = JSON.parse(localStorage.getItem('ordersHistory')) || [];
     temp.push({
-      name,
-      email,
-      phone,
-      order: this.data,
+      customer:{
+        name,
+        email,
+        phone,
+      },
+      items: this.data.data,
+      price: this.data.price,
     });
     localStorage.setItem('ordersHistory', JSON.stringify(temp));
   }

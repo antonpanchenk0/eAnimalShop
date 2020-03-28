@@ -21,6 +21,7 @@ export class OrderController {
     if (!this.model.validateOrderForm(this.view.inputsData)){
       return this.notify('popup', 'Incorrect input, please try again <i class="fa fa-tired"></i>');
     }
+    console.log(this.model.data)
     this.model.saveOrderDataToLocalStorage(this.view.inputsData);
     this.notify('confirmOrder', null);
     this.notify('popup', 'Your order confirmed <i class="fa fa-thumbs-up"></i>');
