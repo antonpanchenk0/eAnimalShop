@@ -2,13 +2,14 @@ const { Op } = require('sequelize');
 const animalModel = require('./animal.model');
 const { NotFound } = require('../../common/exceptions/');
 
-class TaskService {
+class AnimalService {
+
     async selectAll(){
         return animalModel.findAll();
     }
 
-    async selectRange(from, to){
-        return animalModel.findAll( { where: { id: {[Op.between]: [from, to]} } });
+    async getPage(offset, limit){
+        return animalModel.findAll({offset: offset, limit: limit});
     }
 
     async getOneById(id){
@@ -20,7 +21,8 @@ class TaskService {
 
         return animal;
     }
+
 }
 
-const taskController = new TaskService();
-module.exports = taskController;
+const animalService = new AnimalService();
+module.exports = animalService;

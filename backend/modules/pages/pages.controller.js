@@ -1,4 +1,4 @@
-const pagesService = require('./pages.service');
+const animalService = require('../animals/animal.service');
 
 const limit = 8; //count of cards in one page
 
@@ -9,8 +9,7 @@ class PagesController {
         try{
             const offset = limit * (req.params.id - 1);
 
-            console.log(offset)
-            const pageData = await pagesService.getPage(offset, limit);
+            const pageData = await animalService.getPage(offset, limit);
 
             res.json(pageData);
         }catch(e){
