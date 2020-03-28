@@ -18,6 +18,10 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
+      orderPrice:{
+        allowNull: false,
+        type: Sequelize.DECIMAL(20,2),
+      },
       orderDate:{
         allowNull: false,
         type: Sequelize.DATE

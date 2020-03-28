@@ -6,6 +6,7 @@ class Order extends Model{};
 
 const OrderModel = Order.init({
     id: { type: DataTypes.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true},
+    orderPrice: {type: DataTypes.DECIMAL(20,2), allowNull: false },
     orderDate: {type: DataTypes.DATE, allowNull: false}
 }, { sequelize });
 
