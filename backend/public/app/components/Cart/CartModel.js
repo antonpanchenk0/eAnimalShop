@@ -38,14 +38,20 @@ export class CartModel {
     const cartLength = this.currentCartDataState.length;
     for (let i = 0; i < cartLength; i++) {
       if (this.currentCartDataState[i].data.id === data.id) {
-        this.currentCartDataState[i].counter++;
-        return this.currentCartDataState;
+        {
+          if(this.currentCartDataState[i].counter >= data.quantity){
+            return false;
+          }
+          this.currentCartDataState[i].counter++;
+          return true;
+        }
       }
     }
     this.currentCartDataState.push({
       data: data,
       counter: 1
     });
+    return true;
   }
 
   removeCartData(){
@@ -57,8 +63,11 @@ export class CartModel {
     const cartLength = this.currentCartDataState.length;
     for (let i = 0; i < cartLength; i++) {
       if (this.currentCartDataState[i].data.id === id) {
+        if(this.currentCartDataState[i].counter >= this.data.find(item => item.id === id).quantity){
+          return false;
+        }
         this.currentCartDataState[i].counter++;
-        return this.currentCartDataState;
+        return true;
       }
     }
   }

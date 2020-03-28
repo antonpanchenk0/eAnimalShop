@@ -1,9 +1,5 @@
-import {
-  CartView
-} from "./CartView.js";
-import {
-  CartModel
-} from "./CartModel.js";
+import {CartView} from "./CartView.js";
+import {CartModel} from "./CartModel.js";
 
 export class CartController {
   constructor({subscribe, notify}) {
@@ -29,9 +25,12 @@ export class CartController {
 
   //add to cart new item
   addToCart = (data) => {
-    this.model.add(data);
-    this.model.updateSessionStorage();
-    this.updateCartCounter();
+    if(this.model.add(data)){
+      this.model.updateSessionStorage();
+      this.updateCartCounter();
+    } else{
+      this.notify('popup', 'You have reached the maximum quantity of this item available for purchase.');
+    }
   };
 
   //update cart counter in DOM
@@ -41,10 +40,13 @@ export class CartController {
 
   //incrementing positions in cart
   incrementPosition = (data) => {
-    this.model.incrementPos(data);
-    this.model.updateSessionStorage();
-    this.updateCartCounter();
-    this.view.renderData(this.model.cartData, this.model.calcSum); //arguments(current state of data in cart, current total price)
+    if(this.model.incrementPos(data)){
+      this.model.updateSessionStorage();
+      this.updateCartCounter();
+      this.view.renderData(this.model.cartData, this.model.calcSum); //arguments(current state of data in cart, current total price)
+    } else{
+      this.notify('popup', 'You have reached the maximum quantity of this item available for purchase.');
+    }
   }
 
   //decrementing position  in cart
