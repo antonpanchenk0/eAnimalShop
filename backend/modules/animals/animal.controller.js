@@ -4,8 +4,15 @@ class AnimalController {
 
     async selectAll(req, res, next){
         try{
-            const animals = await animalService.selectAll();
-            res.json(animals);
+            const species = req.query.species;
+            if(!species) {
+                const animals = await animalService.selectAll();
+                res.json(animals);
+            }
+            if(species){
+                const filterAnimals = await animalService.selectByFilterSpecie(species);
+                res.json(filterAnimals);
+            }
         } catch (e) {
             next(e);
         }

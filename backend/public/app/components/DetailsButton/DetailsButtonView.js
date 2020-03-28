@@ -16,7 +16,7 @@ export class DetailsButtonView{
           <div class="animal-img" style="background-image: url(${image})"></div>
           <div class="animal-info row">
             <div class="box col-12 col-md-4 col-lg-3">
-                <p>Specie: <span>${species}</span></p>
+                <p>Species: <span>${species}</span></p>
             </div>
             <div class="box col-12 col-md-4 col-lg-3">
                 <p>Breed: <span>${breed}</span></p>

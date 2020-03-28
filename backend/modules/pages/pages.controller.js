@@ -2,7 +2,6 @@ const animalService = require('../animals/animal.service');
 
 const limit = 8; //count of cards in one page
 
-
 class PagesController {
 
     async getPage(req, res, next){
@@ -39,11 +38,10 @@ class PagesController {
                     }
                     default:{
                         //Error mb?
+                        res.sendStatus(404);
                         break;
                     }
                 }
-
-
             }
         }catch(e){
             next(e);

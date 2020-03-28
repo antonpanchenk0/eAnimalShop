@@ -8,6 +8,10 @@ class AnimalService {
         return animalModel.findAll();
     }
 
+    async selectByFilterSpecie(species){
+        return animalModel.findAll({ where:{species: species} })
+    }
+
     async getPage(offset, limit){
         return animalModel.findAll({offset: offset, limit: limit});
     }
