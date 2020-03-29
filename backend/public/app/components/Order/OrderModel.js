@@ -8,6 +8,10 @@ export class OrderModel {
     }
   }
 
+  get currentData(){
+    return this.data;
+  }
+
   get orderDataLength(){
     return this.data.data.length;
   }
@@ -37,4 +41,5 @@ export class OrderModel {
     });
     localStorage.setItem('ordersHistory', JSON.stringify(temp));
   }
+
 }

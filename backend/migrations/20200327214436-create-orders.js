@@ -22,7 +22,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DECIMAL(20,2),
       },
-      orderDate:{
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
       }
