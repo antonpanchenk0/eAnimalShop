@@ -1,4 +1,6 @@
+const {Op} = require('sequelize');
 const animalService = require('../animals/animal.service');
+
 
 const limit = 8; //count of cards in one page
 
@@ -7,42 +9,41 @@ class PagesController {
     async getPage(req, res, next){
         try{
             const offset = limit * (req.params.id - 1);
-            const sortBy = req.query.sort;
-            if(!sortBy) {
-
-                const pageData = await animalService.getPage(offset, limit);
-
-                res.json(pageData);
-            }
-            if(sortBy){
-                switch (sortBy) {
+            const {sort, species, breed} = req.query;
+            let query = {where:{}};
+            query.offset = offset;
+            query.limit = limit;
+            if(sort){
+                switch (sort) {
                     case 'priceDown':{
-                        const pageSortData = await animalService.getPageSortByPriceDown(offset, limit);
-                        res.json(pageSortData);
+                        query.order = [['price', 'DESC']];
                         break;
                     }
                     case 'priceUp':{
-                        const pageSortData = await animalService.getPageSortByPriceUp(offset, limit);
-                        res.json(pageSortData);
+                        query.order = [['price']];
                         break;
                     }
                     case 'ageDown':{
-                        const pageSortData = await animalService.getPageSortByAgeDown(offset, limit);
-                        res.json(pageSortData);
+                        query.order = [['birth_date', 'DESC']];
                         break;
                     }
                     case 'ageUp':{
-                        const pageSortData = await animalService.getPageSortByAgeUp(offset, limit);
-                        res.json(pageSortData);
+                        query.order = [['birth_date']];
                         break;
                     }
                     default:{
-                        //Error mb?
-                        res.sendStatus(404);
                         break;
                     }
                 }
             }
+            if(species){
+                query.where.species = species;
+            }
+            if(breed){
+                query.where.breed = {[Op.startsWith]: breed}
+            }
+            const page = await animalService.selectAll(query);
+            res.json(page);
         }catch(e){
             next(e);
         }
