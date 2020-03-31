@@ -1,9 +1,14 @@
 const { Op } = require('sequelize');
 const sequelize = require('../../db');
 const OrderModel = require('./orders.model');
+const CustomerModel = require('../customers/customers.model');
 const OrderItemModel = require('./order-item.model');
 const CustomerService = require('../customers/customers.service');
 const AnimalService = require('../animals/animal.service');
+const AnimalModel = require('../animals/animal.model');
+const http = require('request');
+const { telegram } = require('../../config');
+
 
 class OrderService{
 
@@ -46,6 +51,46 @@ class OrderService{
             return order;
         });
     }
+
+    async findMany(){
+        return OrderModel.findAll({
+            include:[
+                { model: CustomerModel, as: 'сustomer', attributes:['id', 'name', 'email','phone']},
+                { model: OrderItemModel, as: 'items', include: [{model: AnimalModel, attributes: ['id','name','species','price','breed']}], attributes:['quantity']}
+            ],
+            attributes:[
+                'id',
+                'orderPrice'
+            ]
+        });
+    }
+
+    async findOne(id){
+        return OrderModel.findAll({
+            where:{
+              id: id
+            },
+            include:[
+                { model: CustomerModel, as: 'сustomer', attributes:['id', 'name', 'email','phone']},
+                { model: OrderItemModel, as: 'items', include: [{model: AnimalModel, attributes: ['id','name','species','price','breed']}], attributes:['quantity']}
+            ],
+            attributes:[
+                'id',
+                'orderPrice'
+            ]
+        });
+    }
+
+    async sendMessageToTelegram(order){
+        let msg = "New order, width ID: "+ order.id + "\nOrder price: " + order.orderPrice;
+        http.post(`https://api.telegram.org/bot${telegram.token}/sendMessage?chat_id=${telegram.chat}&parse_mode=html&text=${msg}`, (err, res, body) => {
+            if(err){
+                console.log(err);
+                return err;
+            }
+        })
+    }
+
 
 }
 

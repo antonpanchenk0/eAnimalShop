@@ -5,6 +5,8 @@ const createValidator = require('../../common/middlewares/create-validator');
 
 const router = new Router();
 
+router.get('/', ordersController.findMany);
+router.get('/:id', ordersController.findOne);
 router.post('/', createValidator(createOrderDto), ordersController.createOne);
 
 module.exports = router;
