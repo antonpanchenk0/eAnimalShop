@@ -2,6 +2,7 @@ const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../../db');
 const AnimalModel = require('../animals/animal.model');
 const OrderItemModel = require('./order-item.model');
+const CustomerModel = require('../customers/customers.model');
 
 class Order extends Model{};
 
@@ -13,10 +14,10 @@ const OrderModel = Order.init({
 }, { sequelize });
 
 
-OrderModel.items = OrderModel.hasMany(OrderItemModel, {foreignKeyConstraint: true, foreignKey: 'customerId', targetKey: 'id'});
+OrderModel.hasMany(OrderItemModel, { foreignKey: 'orderId', as: 'items' });
+OrderModel.hasOne(CustomerModel, { foreignKeyConstraint: true, foreignKey: 'orderId', as: 'сustomer' });
 
 
 OrderItemModel.animal = OrderItemModel.belongsTo(AnimalModel, {foreignKeyConstraint: true, foreignKey: 'animalId', targetKey: 'id'});
-OrderItemModel.order = OrderItemModel.belongsTo(OrderModel, {foreignKeyConstraint: true, foreignKey: 'orderId', targetKey: 'id'});
 
 module.exports = OrderModel;

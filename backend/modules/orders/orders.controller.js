@@ -3,12 +3,13 @@ const { BadRequest } = require('../../common/exceptions/');
 
 class OrderController{
 
-    createOne(req, res, next){
+    async createOne(req, res, next){
         try{
-            const orderData = req.body;
-            const trans = orderService.createOne(orderData);
+            const order = await orderService.createOne(req.body);
+            console.log(order);
             res.sendStatus(200);
         }catch(e){
+            console.log(e);
             next(e);
         }
     }

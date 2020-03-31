@@ -15,6 +15,6 @@ app.use('/orders', require('./modules/orders/orders.routes'));
 
 app.use(errorHandler);
 
-sequelize.sync();
+// sequelize.sync();
 
 app.listen(3003, ()=>console.log('Application started.'));

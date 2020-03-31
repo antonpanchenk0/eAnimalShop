@@ -3,26 +3,26 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('OrderItems', {
-      id:{
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
       orderId:{
         type: Sequelize.INTEGER,
+        allowNull: false,
         references:{
-          model: 'Orders',
-          key: 'id',
+          model:{
+            tableName: 'Orders',
+            key: 'id',
+          }
         },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
       },
       animalId:{
         type: Sequelize.INTEGER,
+        allowNull: false,
         references:{
-          model: 'Animals',
-          key: 'id',
+          model:{
+            tableName: 'Animals',
+            key: 'id',
+          }
         },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
@@ -31,14 +31,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     })
   },
 

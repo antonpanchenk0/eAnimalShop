@@ -12,4 +12,4 @@ const CustomerModel = Customer.init({
     updatedAt: {type: DataTypes.DATE, allowNull: false}
 }, {sequelize});
 
-module.exports = CustomerModel
+module.exports = CustomerModel;
