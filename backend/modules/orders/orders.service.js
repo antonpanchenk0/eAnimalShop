@@ -1,4 +1,6 @@
 const { Op } = require('sequelize');
+const { telegram } = require('../../config');
+const { BadRequest } = require('../../common/exceptions');
 const sequelize = require('../../db');
 const OrderModel = require('./orders.model');
 const CustomerModel = require('../customers/customers.model');
@@ -7,7 +9,6 @@ const CustomerService = require('../customers/customers.service');
 const AnimalService = require('../animals/animal.service');
 const AnimalModel = require('../animals/animal.model');
 const http = require('request');
-const { telegram } = require('../../config');
 
 
 class OrderService{
@@ -29,13 +30,14 @@ class OrderService{
                         invalidIds.push(item);
                     }
                 })
-                throw new Error(`Invalid animals ids are [${invalidIds.join(',')}]`);
+                throw new BadRequest(400, `Invalid animals ids are [${invalidIds.join(',')}]`);
             }
 
             items.forEach(animal =>{
                 const foundAnimal = foundAnimals.find(a => a.id === animal.id);
                 if(foundAnimal.quantity < animal.quantity){
-                    throw new Error(`You cannot buy more animals tan it is available for id ${animal.id}`)
+                    console.log(foundAnimal.quantity, animal.quantity)
+                    throw new BadRequest(400, `You cannot buy more animals tan it is available for id ${animal.id}`)
                 }
             })
 
@@ -56,7 +58,7 @@ class OrderService{
         return OrderModel.findAll({
             include:[
                 { model: CustomerModel, as: 'сustomer', attributes:['id', 'name', 'email','phone']},
-                { model: OrderItemModel, as: 'items', include: [{model: AnimalModel, attributes: ['id','name','species','price','breed']}], attributes:['quantity']}
+                { model: OrderItemModel, as: 'items', include: [{model: AnimalModel, attributes: ['id','name','species','price','breed'], as: "animal"}], attributes:['quantity']}
             ],
             attributes:[
                 'id',
@@ -81,6 +83,19 @@ class OrderService{
         });
     }
 
+    async getHistory(query){
+        return OrderModel.findAll({
+            include:[
+                { model: CustomerModel, as: 'сustomer', attributes:['id', 'name', 'email','phone'], where: query},
+                { model: OrderItemModel, as: 'items', include: [{model: AnimalModel, attributes: ['id','name','species','price','breed'], as: "animal"}], attributes:['quantity']}
+            ],
+            attributes:[
+                'id',
+                'orderPrice'
+            ]
+        });
+    }
+
     async sendMessageToTelegram(order){
         const { id, orderPrice, сustomer, items } = order[0];
         let msg = `*New order (${id})*\n*Order price: ${orderPrice}$*\n*Customer name: ${сustomer.name}*\n*Customer email: ${сustomer.email}*\n*Customer phone: ${сustomer.phone}*\n*Order:*\nid|name|species|price|breed|price by one|quantity\n`;
@@ -89,10 +104,10 @@ class OrderService{
         msg+=positions;
         http.post(`https://api.telegram.org/bot${telegram.token}/sendMessage?chat_id=${telegram.chat}&parse_mode=markdown&text=${msg}`, (err, res, body) => {
             if(err){
-                console.log(err);
                 return err;
             }
         })
+        return true;
     }
 
 

@@ -32,9 +32,13 @@ export class OrderController {
         this.notify('popup', 'Your order confirmed <i class="fa fa-thumbs-up"></i>');
         this.view.closeForm();
         this.notify('closeCart', null);
-      }else{
+        this.notify('refreshData', null);
+      }
+      else{
         this.notify('popup', `Error (${res.status}): ${res.statusText} <i class="fa fa-thumbs-down"></i>`);
       }
+    }).catch(res =>{
+      this.notify('popup', `Error (${res.status}): ${res.statusText} <i class="fa fa-thumbs-down"></i>`);
     });
   }
 

@@ -11,6 +11,7 @@ export class RenderController {
     this.subscribe('search', this.renderFilterAnimals);
     this.subscribe('sort', this.renderSortAnimals);
     this.subscribe('pagination', this.handlePagination);
+    this.subscribe('refreshData', this.refreshDataAfterCreateOrder);
 
     this.renderAnimals().then(()=>this.renderFilters()).then(()=> this.deletePreloader());
   }
@@ -60,6 +61,10 @@ export class RenderController {
   handleAddToCart = (id) =>{
     const animal = this.model.getSingleAnimal(id);
     this.notify('addToCart', animal);
+  }
+
+  refreshDataAfterCreateOrder = () =>{
+    this.renderAnimals().then(()=>this.renderFilters());
   }
 
 }

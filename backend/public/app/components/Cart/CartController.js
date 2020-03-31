@@ -28,6 +28,7 @@ export class CartController {
     if(this.model.add(data)){
       this.model.updateSessionStorage();
       this.updateCartCounter();
+      this.notify('popup', `Animal ${data.name}, added to cart.`);
     } else{
       this.notify('popup', 'You have reached the maximum quantity of this item available for purchase.');
     }

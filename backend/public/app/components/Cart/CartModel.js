@@ -47,6 +47,10 @@ export class CartModel {
         }
       }
     }
+    const animalEntity = this.data.find(a=>a.id===data.id);
+    if(!animalEntity || animalEntity.quantity < 1){
+      return false;
+    }
     this.currentCartDataState.push({
       data: data,
       counter: 1
