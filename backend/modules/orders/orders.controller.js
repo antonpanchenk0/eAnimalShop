@@ -6,7 +6,8 @@ class OrderController{
     async createOne(req, res, next){
         try{
             const order = await orderService.createOne(req.body);
-            const msg = await orderService.sendMessageToTelegram(order);
+            const orderFullData = await orderService.findOne(order.id);
+            const msg = await orderService.sendMessageToTelegram(orderFullData);
             res.sendStatus(200);
         }catch(e){
             console.log(e)

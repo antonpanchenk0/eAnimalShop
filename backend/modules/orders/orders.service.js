@@ -72,18 +72,22 @@ class OrderService{
             },
             include:[
                 { model: CustomerModel, as: 'сustomer', attributes:['id', 'name', 'email','phone']},
-                { model: OrderItemModel, as: 'items', include: [{model: AnimalModel, attributes: ['id','name','species','price','breed']}], attributes:['quantity']}
+                { model: OrderItemModel, as: 'items', include: [{model: AnimalModel, attributes: ['id','name','species','price','breed'], as: 'animal'}], attributes:['quantity']}
             ],
             attributes:[
                 'id',
-                'orderPrice'
+                'orderPrice',
             ]
         });
     }
 
     async sendMessageToTelegram(order){
-        let msg = "New order, width ID: "+ order.id + "\nOrder price: " + order.orderPrice;
-        http.post(`https://api.telegram.org/bot${telegram.token}/sendMessage?chat_id=${telegram.chat}&parse_mode=html&text=${msg}`, (err, res, body) => {
+        const { id, orderPrice, сustomer, items } = order[0];
+        let msg = `*New order (${id})*\n*Order price: ${orderPrice}$*\n*Customer name: ${сustomer.name}*\n*Customer email: ${сustomer.email}*\n*Customer phone: ${сustomer.phone}*\n*Order:*\nid|name|species|price|breed|price by one|quantity\n`;
+        let positions = items.map(item=>(`${item.animal.id} | ${item.animal.name} | ${item.animal.species} | ${item.animal.price} | ${item.animal.breed} | ${item.animal.price}$ | ${item.quantity}`))
+        positions = positions.join('\n');
+        msg+=positions;
+        http.post(`https://api.telegram.org/bot${telegram.token}/sendMessage?chat_id=${telegram.chat}&parse_mode=markdown&text=${msg}`, (err, res, body) => {
             if(err){
                 console.log(err);
                 return err;
