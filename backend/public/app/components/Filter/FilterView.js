@@ -19,7 +19,10 @@ export class FilterView{
         return this.activeFilter.name;
     }
 
-    //filter render to DOM
+    /**
+     * filter render to DOM
+     * @param data:Set of filters
+     */
     renderFilters(data){
         this.renderSingleFilter('all', this.filterCountainer).classList.add('f-active');
         data.forEach(value=>this.renderSingleFilter(value, this.filterCountainer));
@@ -28,7 +31,12 @@ export class FilterView{
         this.filterParentBlock.classList.add('f-render');
     }
 
-    //Create Node to one filter
+    /**
+     * Create Node to one filter
+     * @param value:string
+     * @param parent:HTMLElement
+     * @returns {HTMLButtonElement}
+     */
     renderSingleFilter(value, parent){
         const btn = document.createElement('button');
         btn.textContent = this.convertToMany(value);
@@ -38,7 +46,11 @@ export class FilterView{
         return btn;
     }
 
-    //Click event filter
+    /**
+     * Click event filter
+     * @param e:event
+     * @param value:string
+     */
     handleFilterClick = (e, value) =>{
         e.preventDefault();
         if(this.activeFilter && !e.target.classList.contains('f-active')){
@@ -50,7 +62,11 @@ export class FilterView{
         this.handleUpdateDataByFilters();
     }
 
-    //Convert filter value to many
+    /**
+     * Convert filter value to many
+     * @param value:string
+     * @returns {*}
+     */
     convertToMany(value){
         const letters = ['a', 'i', 'o', 'u', 'ss', 's', 'x', 'z', 'ch', 'sh'];
         const wordLength = value.length;

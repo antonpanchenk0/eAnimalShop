@@ -23,7 +23,10 @@ export class CartController {
     this.subscribe('closeCart', this.closeCart);
   }
 
-  //add to cart new item
+  /**
+   * Add to cart new item
+   * @param data:object of Animal
+   */
   addToCart = (data) => {
     if(this.model.add(data)){
       this.model.updateSessionStorage();
@@ -34,14 +37,19 @@ export class CartController {
     }
   };
 
-  //update cart counter in DOM
+  /**
+   * Update cart counter in cart icon
+   */
   updateCartCounter = () => {
     this.view.updateCartCounter(this.model.cartCounter); //cartCounter - number of elements in cart
   };
 
-  //incrementing positions in cart
-  incrementPosition = (data) => {
-    if(this.model.incrementPos(data)){
+  /**
+   * Increment cart position
+   * @param animalId:number
+   */
+  incrementPosition = (animalId) => {
+    if(this.model.incrementPos(animalId)){
       this.model.updateSessionStorage();
       this.updateCartCounter();
       this.view.renderData(this.model.cartData, this.model.calcSum); //arguments(current state of data in cart, current total price)
@@ -50,33 +58,46 @@ export class CartController {
     }
   }
 
-  //decrementing position  in cart
-  decrementPosition = (data) => {
-    const res = this.model.decrementPos(data);
+  /**
+   * Decrement cart position
+   * @param animalId:number
+   */
+  decrementPosition = (animalId) => {
+    const res = this.model.decrementPos(animalId);
     this.model.updateSessionStorage();
     this.updateCartCounter();
     this.view.renderData(this.model.cartData, this.model.calcSum); //arguments(current state of data in cart, current total price)
   }
 
-  //delete position in cart
-  deletePosition = (data) => {
-    this.model.deletePos(data);
+  /**
+   * Delete position in cart
+   * @param animalId:number
+   */
+  deletePosition = (animalId) => {
+    this.model.deletePos(animalId);
     this.model.updateSessionStorage();
     this.updateCartCounter();
     this.view.renderData(this.model.cartData, this.model.calcSum); //arguments(current state of data in cart, current total price)
   }
 
-  //open cart
+  /**
+   * Event on click cart button
+   */
   openCart = () => {
     this.view.open(this.model.cartData, this.model.calcSum); //arguments(current state of data in cart, current total price)
   }
 
-  //close cart
+  /**
+   * Event on close cart modal window
+   */
   closeCart = () => {
     this.view.close();
     this.notify('closeOrderForm', null);
   }
 
+  /**
+   * Full clear cart data
+   */
   clearCart = () =>{
     this.model.removeCartData();
     this.model.updateSessionStorage();
@@ -84,12 +105,18 @@ export class CartController {
     this.view.renderData(this.model.cartData, this.model.calcSum);
   }
 
-  //get main data from renderController
+  /**
+   * Get main data from renderController
+   * @param data
+   */
   catchData = (data) =>{
     this.model.catchData(data);
     this.model.updateData();
   }
 
+  /**
+   * Sending data to orderController
+   */
   sendData = () =>{
     this.notify('sendCartData', {data: this.model.shortCartData, price: this.model.calcSum});
   }

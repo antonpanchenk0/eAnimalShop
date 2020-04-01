@@ -17,6 +17,9 @@ export class OrderController {
     this.sendOrderToServer = this.sendOrderToServer.bind(this);
   }
 
+  /**
+   * Create order function
+   */
   handleOrder = () => {
     if(!this.model.orderDataLength){
       return this.notify('popup', 'Your cart is empty <i class="fa fa-box-open"></i>');
@@ -50,10 +53,18 @@ export class OrderController {
     this.notify('getCartData', null);
   }
 
+  /**
+   *  Init data from cart, where ordering
+   * @param data:Array of Animals {id, counter}
+   */
   orderDataInit = (data) =>{
     this.model.dataInit(data);
   }
 
+  /**
+   * Send order to back
+   * @returns {Promise<Response>}
+   */
   async sendOrderToServer(){
     const inputsValue = this.view.inputsData;
     const cartData = this.model.currentData;

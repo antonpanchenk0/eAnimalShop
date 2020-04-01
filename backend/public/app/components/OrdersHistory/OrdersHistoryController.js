@@ -21,6 +21,10 @@ export class OrdersHistoryController {
         this.view.close();
     }
 
+    /**
+     *
+     * @param data:Array of AnimalObjects
+     */
     setData = (data) =>{
         this.model.setMainData(data);
         this.model.update();

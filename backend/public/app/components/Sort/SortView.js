@@ -5,6 +5,10 @@ export class SortView {
     this.sortItems.forEach(btn => btn.addEventListener('click', listener));
   }
 
+  /**
+   *
+   * @returns {Element}
+   */
   get switchBtn(){
     return this.sortShwitchBtn;
   }

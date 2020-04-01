@@ -9,7 +9,10 @@ export class RenderModel {
     this.paginationPage = 1; // number of page
   }
 
-  //function get data from database
+  /**
+  * function get data from database
+  * @returns Promise
+  */
   getData() {
     return fetch(this.dataLink).then(res => res.json()).then(arr => {
       this.data = arr.map(obj => obj);
@@ -18,18 +21,30 @@ export class RenderModel {
     });
   }
 
-  //function get information about one animal
+  /**
+  * function get information about one animal
+  * @param id:number
+  * @returns {*}
+  */
   getSingleAnimal(id){
     return this.data.find(animal => animal.id == id);
   }
 
-  //Species count for render filters
+  /**
+   * Species count for render filters
+   * @returns Array
+  */
   async getFilters(){
     this.data.forEach(item=>this.filters.add(item.species));
     return this.filters;
   }
 
-  //Filters data by input search and filter btn
+    /**
+     * Filters data by input search and filter btn
+     * @param inputSearch:string
+     * @param activeBtn:string
+     * @returns Array
+     */
   filterData({inputSearch, activeBtn}){
     const regSearch_breed = new RegExp(inputSearch, 'i');
     const regSearch_species = new RegExp(activeBtn, 'i');
@@ -40,9 +55,13 @@ export class RenderModel {
     return this.currentDataState;
   }
 
-  //Data sort
-  sortData(id) {
-    switch(id) {
+    /**
+     * Sorting data function
+     * @param sort:string
+     * @returns Array
+     */
+  sortData(sort) {
+    switch(sort) {
       case 'PriceUp': {
         this.currentDataState.sort((a, b) => a.price - b.price);
         break;
@@ -67,7 +86,11 @@ export class RenderModel {
     return this.getPaginationData(this.currentDataState);
   }
 
-  // Select from currentDataState, amount of elements eq this.paginationCount, for render it
+    /**
+     * Select from currentDataState, amount of elements eq this.paginationCount, for render it
+     * @param where:string
+     * @returns Array
+     */
   getPaginationData(where) {
     switch(where) {
       case 'next': {

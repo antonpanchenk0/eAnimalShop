@@ -10,13 +10,18 @@ export class FilterController {
     this.subscribe('getFilters', this.renderFilterBtn);
   }
 
-  //The function to call the render filter and further unsubscribe from the event
+  /**
+   * The function to call the render filter and further unsubscribe from the event
+   * @param data:Set of filters
+   */
   renderFilterBtn = (data) => {
     this.view.renderFilters(data);
     this.unsubscribe('getFilters', this.renderFilterBtn);
   }
 
-  //When changing filter values, the function calls search and executes the callbacks of subscribers
+  /**
+   * When changing filter values, the function calls search and executes the callbacks of subscribers
+   */
   updateFiltersValueForRerender = () => {
     this.notify('search', {inputSearch: this.view.dataInputValue, activeBtn: this.view.activeFilterName});
   }

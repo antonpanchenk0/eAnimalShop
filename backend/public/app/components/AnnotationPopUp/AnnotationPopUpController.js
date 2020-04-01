@@ -8,6 +8,10 @@ export class AnnotationPopUpController {
         this.subscribe('popup', this.popup);
     }
 
+    /**
+     * Show PopUp in DOM
+     * @param data:String
+     */
     popup = (data) =>{
         this.view.render(data);
     }

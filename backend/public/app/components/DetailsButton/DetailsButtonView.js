@@ -9,6 +9,10 @@ export class DetailsButtonView{
         $(this.modalWindow).on('hidden.bs.modal', closeListener); //bootstrap4 modalWindow close event
     }
 
+    /**
+     * Render detail window data
+     * @param data:object of Animal
+     */
     show(data){
         const {id, species, name, image, price, gender, weight, birth_date, color, breed, is_sterile, hair, description} = data;
         this.modaTitle.innerHTML = name[0].toUpperCase() + name.slice(1,);
@@ -49,13 +53,11 @@ export class DetailsButtonView{
         `;
         this.modalBody.innerHTML = node;
 
-        //Bad practise???
         this.modalFooter.innerHTML = `
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary modal-add-to-cart" data-dismiss="modal">Add to cart</button>
         `;
         this.modalFooter.querySelector('.modal-add-to-cart').addEventListener('click', (ev)=>{this.addToCartListener(data)});
-        //Bad practise???
         $(this.modalWindow).modal('show');
     }
 

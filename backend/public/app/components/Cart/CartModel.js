@@ -106,7 +106,9 @@ export class CartModel {
     this.data = data;
   }
 
-  //updating data by session storage
+  /**
+   * Rewriting dataArray cart to Array with animals data and quantity
+   */
   updateData = () =>{
     let tempData = [];
     if(this.currentCartDataState.length){

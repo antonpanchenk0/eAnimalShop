@@ -5,7 +5,9 @@ export class PaginationView {
     this.paginationBtns.forEach(btn => btn.addEventListener('click', listener));
   }
 
-  //show pagination FOR PRELOADER!!!
+  /**
+   * show pagination FOR PRELOADER!!!
+   */
   show(){
     this.paginationBox.classList.add('show');
   }

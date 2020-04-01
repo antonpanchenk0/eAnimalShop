@@ -10,15 +10,26 @@ export class DetailsButtonController{
         this.subscribe('show-details-event', this.showModal);
     }
 
+    /**
+     * Add to cart Event
+     * @param data:object of Animal
+     */
     addToCart = (data) =>{
         this.notify('addToCart', data);
         this.closeModal();
     }
 
+    /**
+     * Show details window
+     * @param data:object of Animal
+     */
     showModal = (data) =>{
         this.view.show(data);
     }
 
+    /**
+     * Close detail window
+     */
     closeModal = () =>{
         this.view.close();
     }

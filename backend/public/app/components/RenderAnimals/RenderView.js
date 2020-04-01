@@ -8,7 +8,10 @@ export class RenderView {
     this.addToCartListener = addToCartListener; //Add to cart button eventListener callback
   }
 
-  //render all card into DOM
+    /**
+     * render all card into DOM
+     * @param arr:Array of animals
+     */
   renderData(arr) {
     this.animalContainer.innerHTML = ''; //Clear animalContainer
     arr.forEach(elem => {
@@ -16,7 +19,11 @@ export class RenderView {
     });
   }
 
-  //single card structure
+    /**
+     * create single card structure
+     * @param AnimalObject
+     * @returns {HTMLDivElement}
+     */
   renderSingleAnimal({id, species, name, image, price, gender, weight, birth_date, color, breed, is_sterile, hair, description}) {
     const uName = name[0].toUpperCase() + name.slice(1);
     const node = document.createElement('div');
@@ -51,17 +58,26 @@ export class RenderView {
     return node;
   }
 
-  //Render page by num
+    /**
+     * Render page by num
+     * @param num:number of page
+     */
   renderPageNum(num = 1) {
     this.pageNum.innerHTML = `${num}`;
   }
 
-  //off preloader function
+    /**
+     * off preloader function
+     */
   offPreloader(){
     this.fadeOut(this.loader, document.body);
   }
 
-  //FadeOut preloader and remove from parent!!!
+    /**
+     * FadeOut preloader and remove from parent!!!
+     * @param node:DOMElement
+     * @param parent:DOMElement
+     */
   fadeOut(node, parent){
     const fadeStep = 1 / (1000 / 40);  //1-max opacity val, 1000 - 1 second, 30 - fps;
     let opacity = 1;

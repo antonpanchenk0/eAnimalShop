@@ -12,6 +12,10 @@ export class OrdersHistoryModel {
         return this.history.length;
     }
 
+    /**
+     * Set main data from renderModel
+     * @param data
+     */
     setMainData = (data) =>{
         this.mainData = data;
     }

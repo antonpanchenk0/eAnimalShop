@@ -455,6 +455,33 @@ body{
     transform-origin: center center;
 }
 
+.btn-primary{
+    box-shadow: none!important;
+    border: none!important;
+    background-color: #117a8b;
+    font-weight: bold;
+    color: #ffffff;
+}
+.btn-primary:hover{
+    background-color: #0c6f7b;
+}
+.btn-primary:focus{
+    background-color: #117a8b;;
+}
+.btn-secondary{
+    background-color: #495057;
+    border: none!important;
+    box-shadow: none!important;
+    color: #ffffff;
+    font-weight: bold;
+}
+.btn-secondary:hover{
+    background-color: #40474e;
+}
+.btn-secondary:focus{
+    background-color: #495057;
+}
+
 @-webkit-keyframes stroke-spacing {
     0% {
         stroke-dasharray: 0 200;
