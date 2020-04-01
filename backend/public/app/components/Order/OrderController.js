@@ -25,11 +25,11 @@ export class OrderController {
     if (!this.model.validateOrderForm(this.view.inputsData)){
       return this.notify('popup', 'Incorrect input, please try again <i class="fa fa-tired"></i>');
     }
-    this.model.saveOrderDataToLocalStorage(this.view.inputsData);
     this.sendOrderToServer().then(res => {
       if(res.status === 200) {
         this.notify('confirmOrder', null);
         this.notify('popup', 'Your order confirmed <i class="fa fa-thumbs-up"></i>');
+        this.model.saveOrderDataToLocalStorage(this.view.inputsData);
         this.view.closeForm();
         this.notify('closeCart', null);
         this.notify('refreshData', null);
@@ -37,8 +37,8 @@ export class OrderController {
       else{
         this.notify('popup', `Error (${res.status}): ${res.statusText} <i class="fa fa-thumbs-down"></i>`);
       }
-    }).catch(res =>{
-      this.notify('popup', `Error (${res.status}): ${res.statusText} <i class="fa fa-thumbs-down"></i>`);
+    }).catch(err =>{
+      this.notify('popup', `Unknown server error: ${err.statusText || 'unknown'} <i class="fa fa-thumbs-down"></i>`);
     });
   }
 

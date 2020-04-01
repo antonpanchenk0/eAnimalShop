@@ -40,13 +40,10 @@ class OrderController{
     async getHistory(req, res, next){
         try{
             const {email, phone} = req.query;
-            console.log(req.query)
             if(!email && !phone){
-                console.log('if1')
                 throw new BadRequest(400, 'Cannot load history');
             }
             if(email){
-                console.log('if2')
                 let history = await orderService.getHistory({email: email});
                 res.send(history);
             }
@@ -55,8 +52,6 @@ class OrderController{
                 res.send(history);
             }
         }catch (e) {
-            console.log(":(")
-            console.log(e)
             next(e);
         }
     }

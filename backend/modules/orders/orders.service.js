@@ -17,7 +17,6 @@ class OrderService{
         return sequelize.transaction(async transaction =>{
             const { items, customer, price } = orderData;
 
-            //Вынести в animals
             const foundAnimals = await AnimalService.selectAll({
                 where: { id: { [Op.in]: items.map(i => i.id) } },
                 attributes: ['id', 'quantity'],
@@ -36,7 +35,6 @@ class OrderService{
             items.forEach(animal =>{
                 const foundAnimal = foundAnimals.find(a => a.id === animal.id);
                 if(foundAnimal.quantity < animal.quantity){
-                    console.log(foundAnimal.quantity, animal.quantity)
                     throw new BadRequest(400, `You cannot buy more animals tan it is available for id ${animal.id}`)
                 }
             })
