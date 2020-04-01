@@ -6,5 +6,9 @@
     "host": "localhost",
     "port": 5432,
     "dialect": "postgres"
+  },
+  "telegram": {
+    "token": "1102708959:AAE9ST7RQyMzC-7B87iyuhpgzHlljOMD1V0",
+    "chat": "384551436"
   }
 }

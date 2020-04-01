@@ -1,10 +1,13 @@
+const sequelize = require('sequelize');
 const animalModel = require('./animal.model');
 const { NotFound } = require('../../common/exceptions/');
 
-class TaskService {
-    async selectAll(){
-        return animalModel.findAll();
+class AnimalService {
+
+    async selectAll(query){
+        return animalModel.findAll(query);
     }
+
     async getOneById(id){
         const animal = await animalModel.findOne({where: { id }});
 
@@ -14,7 +17,20 @@ class TaskService {
 
         return animal;
     }
+
+    async subtractQuantity(animalId, quantity, transaction){
+        const animal = await animalModel.findOne({ where:{id: animalId}, transaction });
+        if(!animal){
+            throw new NotFound(`Animal with id ${animalId} not found`);
+        }
+        if(animal.quantity < quantity){
+            throw new Error(`You cannot buy more pets than it is available for id ${animal.id}`)
+        }
+        animal.quantity -= quantity;
+        await animal.save({transaction});
+    }
+
 }
 
-const taskController = new TaskService();
-module.exports = taskController;
+const animalService = new AnimalService();
+module.exports = animalService;

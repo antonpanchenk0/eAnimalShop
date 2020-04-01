@@ -1,10 +1,12 @@
+const { Op } = require('sequelize');
 const animalService = require('./animal.service');
 
 class AnimalController {
 
     async selectAll(req, res, next){
         try{
-            const animals = await animalService.selectAll();
+            //Select * From Animals where quantity Not equal 0
+            const animals = await animalService.selectAll({where: { quantity: {[Op.ne]: 0} } });
             res.json(animals);
         } catch (e) {
             next(e);

@@ -8,9 +8,13 @@ const app = express();
 app.use(bodyParser.json());
 
 
+app.use('/', express.static('public'));
 app.use('/animals', require('./modules/animals/animals.routes'));
+app.use('/page', require('./modules/pages/pages.routes'));
+app.use('/orders', require('./modules/orders/orders.routes'));
+
 app.use(errorHandler);
 
-sequelize.sync();
+// sequelize.sync();
 
 app.listen(3003, ()=>console.log('Application started.'));
